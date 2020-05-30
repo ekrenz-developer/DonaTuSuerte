@@ -12,6 +12,7 @@ export class SignUpComponent implements OnInit {
   showRoles = false;
   showSignUpForm = false;
 
+  formData = new FormData();
 
   constructor(private request: LoginService) {
     request.getRoles().then(data => {
@@ -27,6 +28,28 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  selectRole(roleSelected) {
+    this.user.role = roleSelected;
+    this.showSignUpForm = true;
+    this.showRoles = false;
+  }
+
+  onFileSelected(event) {
+
+    this.formData.append('photo', event.target.files[0])
+  }
+
+  signUp() {
+    Object.keys(this.user).forEach((key) => { this.formData.append(key, this.user[key]) });
+    Object.keys(this.user).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
+    this.request.signUp(this.formData);
+  }
+
+  changeUser() {
+    this.showRoles = true;
+    this.showSignUpForm = false;
   }
 
 

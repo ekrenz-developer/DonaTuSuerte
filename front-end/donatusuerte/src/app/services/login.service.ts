@@ -12,13 +12,9 @@ export class LoginService {
 
   constructor( private request: RequestService ,  private router: Router  , private http : HttpClient) { }
 
-  signUp() {
-
-  }
-
   currentUser;
 
-  signIn( body : any ) {
+  signUp( body : any ) {
     let uri = "/users/sign-up";
 
     this.request.post(uri, body )
