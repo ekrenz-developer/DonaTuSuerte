@@ -1,1 +1,28 @@
-<p>sign-in works!</p>
+<video autoplay muted loop id="myVideo">
+  <source src="assets/video/video1.mp4" type="video/mp4" >
+</video>
+
+<div class="container rounded">
+  <img class="userlogin" src="assets/images/userlogin.png" alt="10"><br> <br>
+    <div class="card">
+      <label  for="name">Email</label>
+        <input id="email" class="form-control"type="email"> <br>
+
+        <label  for="pass">Contraseña</label>
+        <input  id="pass" class="form-control"type="password"> <br><br>
+        <button class="btn btn-info"> Iniciar Sesion </button> <br>
+        <label for="">¿No tienes cuenta?</label>
+        <a class="btn btn-secondary" href="/signUp"> Registrarme </a>
+     </div>
+      <hr>
+
+    <div class="btn btn-light">
+      <a class="oauth-container btn darken-4 white black-text" style="text-transform:none">
+        <div class="left">
+          <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        </div>
+            Inicia con Google
+      </a>
+    </div>
+</div>
