@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import setLoaders from './loaders/index';
-import config from '../config/index';
+import config from './config/index';
 
 const startServer = async () => {
   const server = express();
