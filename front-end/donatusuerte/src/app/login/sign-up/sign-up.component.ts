@@ -25,7 +25,31 @@ export class SignUpComponent implements OnInit {
     
   ];
 
-  
+  user = {
+    "email": "",
+    "password": "",
+    "photo": "",
+    "firstName": "",
+    "lastName": "",
+    "dateOfBirth": "",
+    "country": "",
+    "address": {
+      "street": "",
+      "city": "",
+      "state": "",
+      "postalCode": "",
+      "country": "",
+      "lat": "",
+      "lon": ""
+    },
+    "phone": "",
+    "conditions": false,
+    "score": 0,
+    "role": ""
+  }
+
+
+
   showRoles = true;
   showSignUpForm = false;
 
@@ -61,9 +85,10 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
+    console.log ( this.user )
     Object.keys(this.user).forEach((key) => { this.formData.append(key, this.user[key]) });
     Object.keys(this.user).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
-    this.request.signUp(this.formData);
+    //this.request.signUp(this.formData);
   }
 
   changeUser() {
@@ -72,28 +97,7 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  user = {
-    "email": "",
-    "password": "",
-    "photo": "",
-    "firstName": "",
-    "lastName": "",
-    "dateOfBirth": "",
-    "country": "",
-    "address": {
-      "street": "",
-      "city": "",
-      "state": "",
-      "postalCode": "",
-      "country": "",
-      "lat": "",
-      "lon": ""
-    },
-    "phone": "",
-    "conditions": false,
-    "score": 0,
-    "role": ""
-  }
+ 
 
 
 }
