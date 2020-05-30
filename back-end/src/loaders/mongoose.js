@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import config from '../config/index';
 
 const mongooseLoader = async () => {
-  const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.MONGO_URL}`
+  const url = `mongodb+srv://${config.DB_USER}:${config.DB_PASS}${config.MONGO_URL}`
 
   try {
     const connection = await mongoose.connect(url, {
