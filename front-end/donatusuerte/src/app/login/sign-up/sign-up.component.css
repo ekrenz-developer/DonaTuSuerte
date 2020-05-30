@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    /* justify-content: center; */
+    bottom: 0;
+    background: rgba(1, 47, 133, 0.466);
+    color: #ffffff;
+    width: 100%;
+    padding: 20px;
+    margin-top: 70px;
+  }
+
+  #myVideo {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+
+li{
+  color:black;
+  font-size: -webkit-xxx-large;
+  font-weight: 300;
+}
+
+li:hover{
+  font-weight: 700;
+}
+.btn-info {
+  margin-left:15px;
+}
