@@ -34,4 +34,12 @@ export class RequestService {
       .catch(err => { return err; })
   }
 
+
+   get ( uri  )
+  {
+    let url = this.url + uri;
+
+    return this.http.get( url ,  {headers : this.getHeaders() } ).toPromise().then ( data => { return data; })
+  } 
+
 }

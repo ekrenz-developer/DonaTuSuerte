@@ -10,14 +10,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
 
-  constructor( private request: RequestService ,  private router: Router  , private http : HttpClient) { }
+  constructor(private request: RequestService, private router: Router, private http: HttpClient) { }
 
   currentUser;
 
-  signUp( body : any ) {
+  signUp(body: any) {
     let uri = "/users/sign-up";
 
-    this.request.post(uri, body )
+    this.request.post(uri, body)
       .then(data => {
         let response: any = data;
         this.currentUser = response;
@@ -43,14 +43,47 @@ export class LoginService {
   }
 
 
-  getRolesDesc ()
-  {
-    return this.http.get("./assets/properties/roles.json").toPromise().then ( data => { return data; })
+  signIn(user, pass) {
+
+    let body = {
+      "email": user,
+      "password": pass
+    }
+
+    this.request.post('/users/sign-in', body)
+      .then(data => {
+        let response: any = data;
+        console.log(response.data.user)
+        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('id', response.data.user._id)
+        localStorage.setItem('user', JSON.stringify(response.data.user))
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio correctamente como: ' + response.data.firstName + " " + response.data.lastName,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.router.navigate(['/mi-cuenta']);
+      })
+      .catch(err => {
+        console.log(err)
+        Swal.fire({
+          icon: 'error',
+          title: 'Fallo en inicio de sesion',
+          text: 'Usuario o contraseña incorrecta',
+        })
+      })
   }
 
-  getRoles ()
+  getRolesDesc() {
+    return this.http.get("./assets/properties/roles.json").toPromise().then(data => { return data; })
+  }
+
+  getRoles()
   {
-    return this.http.get("./assets/properties/roles.json").toPromise().then ( data => { return data; })
+    let uri = '/roles';
+    return this.request.get ( uri ).then( data => { return data} )
   }
 
 }
