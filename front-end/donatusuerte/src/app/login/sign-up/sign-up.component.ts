@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,8 +25,8 @@ export class SignUpComponent implements OnInit {
       "state": "",
       "postalCode": "",
       "country": "",
-      "lat": "",
-      "lon": ""
+      "lat": "1234",
+      "lon": "1234"
     },
     "phone": "",
     "conditions": false,
@@ -81,7 +82,37 @@ export class SignUpComponent implements OnInit {
     console.log ( this.user )
     Object.keys(this.user).forEach((key) => { this.formData.append(key, this.user[key]) });
     Object.keys(this.user).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
-    this.request.signUp( this.formData );
+
+    if ( this.fieldOk() )
+    {
+      this.request.signUp( this.formData );
+    }
+    else{
+      this.showError ( )
+    }
+  }
+
+  showError () {
+    Swal.fire ('Campos incompletos' , 'Por favor complete los datos' , 'error' )
+  }
+
+  fieldOk ()
+  {
+    let value; 
+    let fielOK = true;
+
+
+    Object.keys(this.user).forEach((key) => { 
+      console.log(key + ": " + this.formData.get(key)) 
+      value = this.formData.get( key );
+      
+      if ( value == null  ||  value == "" ){
+        console.log ( value )
+        fielOK = false;
+      } 
+    });
+
+    return fielOK;
   }
 
   changeUser() {

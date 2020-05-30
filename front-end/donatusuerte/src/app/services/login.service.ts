@@ -54,6 +54,7 @@ export class LoginService {
 
     this.request.post('/users/sign-in', body)
       .then(data => {
+        
         let response: any = data;
         console.log(response.data.user)
         localStorage.setItem('token', response.data.token)
