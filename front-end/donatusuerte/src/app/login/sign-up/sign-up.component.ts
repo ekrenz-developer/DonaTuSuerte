@@ -8,23 +8,40 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SignUpComponent implements OnInit {
 
-  roles = [];
-  showRoles = false;
+  roles = 
+  [
+    {
+      "_id": "0",
+      "description": "Participante"
+    },
+    {
+      "_id": "0",
+      "description": "Organizacion"
+    },
+    {
+      "_id": "0",
+      "description": "Validador"
+    },
+    
+  ];
+
+  
+  showRoles = true;
   showSignUpForm = false;
 
   formData = new FormData();
 
   constructor(private request: LoginService) {
-    request.getRoles().then(data => {
-      let response: any = data;
-      this.roles = response.data;
-      request.getRolesDesc().then(data => {
-        this.roles.forEach(role => {
-          role.description = data[role._id]
-        })
-      })
-      this.showRoles = true;
-    })
+    // request.getRoles().then(data => {
+    //   let response: any = data;
+    //   this.roles = response.data;
+    //   request.getRolesDesc().then(data => {
+    //     this.roles.forEach(role => {
+    //       role.description = data[role._id]
+    //     })
+    //   })
+    //   this.showRoles = true;
+    // })
   }
 
   ngOnInit(): void {
@@ -35,6 +52,8 @@ export class SignUpComponent implements OnInit {
     this.showSignUpForm = true;
     this.showRoles = false;
   }
+
+  
 
   onFileSelected(event) {
 

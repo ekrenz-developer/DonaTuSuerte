@@ -2,14 +2,14 @@
   <source src="assets/video/video1.mp4" type="video/mp4" >
 </video>
 
-<div class="container" style="width: 50rem;">
-    <div  style="text-align: center;">
-      <li  class="alert alert-primary btn btn-primary"> Registro </li>
+<div *ngIf="showRoles" class="container" style="width: 50rem;">
+    <div  *ngFor="let role of roles"  style="text-align: center;">
+      <li  class="alert alert-primary btn btn-primary" (click)="selectRole(role._id)" > {{role.description}} </li>
     </div>
 </div>
 
 
-<div class="container">
+<div *ngIf="showSignUpForm" class="container">
   <div class="row">
     <div class="col">
 <!-- USER PASSWORD  -->
@@ -83,6 +83,6 @@
 
 
 <button class="btn btn-primary">Registrarse</button>
-<button class="btn btn-info">Cambiar Usuario</button>
+<button class="btn btn-info" (click)="changeUser()" >Cambiar Usuario</button>
 </div>
 
