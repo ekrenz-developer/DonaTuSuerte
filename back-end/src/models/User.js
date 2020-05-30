@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 import Draw from './Draw';
 import Role from './Role';
 import Store from './Store';
+import Organization from './Organization';
 
 const schema = new Schema({
   email: String,
