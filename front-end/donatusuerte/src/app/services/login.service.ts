@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { RequestService } from './request.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -21,12 +22,13 @@ export class LoginService {
       .then(data => {
         let response: any = data;
         this.currentUser = response;
-        Swal.fire({
-          icon: 'success',
-          title: 'Registro Correcto como: ' + response.data.firstName + " " + response.data.lastName,
-          showConfirmButton: false,
-          timer: 1500
-        })
+         console.log ( data ) 
+         Swal.fire({
+           icon: 'success',
+           title: 'Registro Correcto como: ' + response.data.firstName + " " + response.data.lastName,
+           showConfirmButton: false,
+           timer: 1500
+         })
 
         this.router.navigate(['/sign-in']);
 
@@ -35,7 +37,7 @@ export class LoginService {
         console.log(err)
         Swal.fire({
           icon: 'error',
-          title: err.error.message,
+          title: err,
           showConfirmButton: false,
           timer: 5000
         })
@@ -60,11 +62,10 @@ export class LoginService {
 
         Swal.fire({
           icon: 'success',
-          title: 'Inicio correctamente como: ' + response.data.firstName + " " + response.data.lastName,
+          title: 'Inicio correctamente como: ' + response.data.user.firstName + " " + response.data.user.lastName,
           showConfirmButton: false,
           timer: 1500
         })
-        this.router.navigate(['/mi-cuenta']);
       })
       .catch(err => {
         console.log(err)

@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
     "password": "",
   }
 
-  simpleLogin() {
+  signIn() {
     this.login.signIn(this.user.email, this.user.password)
   }
 

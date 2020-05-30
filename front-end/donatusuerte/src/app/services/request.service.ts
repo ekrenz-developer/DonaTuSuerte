@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class RequestService {
 
   // server connection url 
-  private url: String = "";
+  private url: String = "http://localhost:4500/api/v1";
 
   // headers to connect server 
   private getHeaders() {
@@ -21,17 +21,18 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
-  post(body, uri) {
+  post(uri,body) {
+ 
     let header: HttpHeaders = this.getHeaders()
-
+    console.log ( this.url + uri )
     if (header != null) {
       return this.http.post(this.url + uri, body, { headers: this.getHeaders() }).toPromise()
-        .then(data => { return data; })
-        .catch(err => { return err; })
+        .then(data => { console.log ( data ) ; return data; })
+        .catch(err => { console.log ( err ) ;return err; })
     }
     return this.http.post(this.url + uri, body ).toPromise()
-      .then(data => { return data; })
-      .catch(err => { return err; })
+      .then(data => { console.log ( data ) ; return data; })
+      .catch(err => { console.log ( err ) ;return err; })
   }
 
 

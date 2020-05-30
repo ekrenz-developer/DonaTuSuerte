@@ -8,23 +8,8 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SignUpComponent implements OnInit {
 
-  roles = 
-  [
-    {
-      "_id": "0",
-      "description": "Participante"
-    },
-    {
-      "_id": "0",
-      "description": "Organizacion"
-    },
-    {
-      "_id": "0",
-      "description": "Validador"
-    },
-    
-  ];
 
+  roles = [];
   user = {
     "email": "",
     "password": "",
@@ -50,22 +35,29 @@ export class SignUpComponent implements OnInit {
 
 
 
-  showRoles = true;
+  showRoles = false;
   showSignUpForm = false;
 
   formData = new FormData();
 
   constructor(private request: LoginService) {
-    // request.getRoles().then(data => {
-    //   let response: any = data;
-    //   this.roles = response.data;
-    //   request.getRolesDesc().then(data => {
-    //     this.roles.forEach(role => {
-    //       role.description = data[role._id]
-    //     })
-    //   })
-    //   this.showRoles = true;
-    // })
+     request.getRoles().then(data => {
+       let response: any = data;
+       this.roles = response.data;
+       
+       request.getRolesDesc().then(data => {
+         this.roles.forEach(role => {
+           role.description = data[role.role]
+           this.showRoles = true;
+         })
+
+         this.roles = this.roles.filter ( rol =>{
+          if ( rol.description != undefined ) return rol;
+        })
+         
+       })
+       
+     })
   }
 
   ngOnInit(): void {
@@ -82,13 +74,14 @@ export class SignUpComponent implements OnInit {
   onFileSelected(event) {
 
     this.formData.append('photo', event.target.files[0])
+    console.log ( event.target.files[0])
   }
 
   signUp() {
     console.log ( this.user )
     Object.keys(this.user).forEach((key) => { this.formData.append(key, this.user[key]) });
     Object.keys(this.user).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
-    //this.request.signUp(this.formData);
+    this.request.signUp( this.formData );
   }
 
   changeUser() {

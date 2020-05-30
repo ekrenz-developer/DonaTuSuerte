@@ -6,13 +6,13 @@
   <img class="userlogin" src="assets/images/userlogin.png" alt="10"><br> <br>
     <div class="card">
       <label  for="name">Email</label>
-        <input id="email" class="form-control"type="email"> <br>
+        <input [(ngModel)]="user.email" id="email" class="form-control"type="email"> <br>
 
         <label  for="pass">Contraseña</label>
-        <input  id="pass" class="form-control"type="password"> <br><br>
-        <button class="btn btn-info"> Iniciar Sesion </button> <br>
+        <input   [(ngModel)]="user.password" id="pass" class="form-control"type="password"> <br><br>
+        <button class="btn btn-info" (click)="signIn()"> Iniciar Sesion </button> <br>
         <label for="">¿No tienes cuenta?</label>
-        <a class="btn btn-secondary" href="/signUp"> Registrarme </a>
+        <a class="btn btn-secondary" href="/sign-up"> Registrarme </a>
      </div>
       <hr>
 
