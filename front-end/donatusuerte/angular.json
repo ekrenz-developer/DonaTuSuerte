@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "donatusuerte"
+    }
+  },
+  "defaultProject": "donatusuerte",
+  "cli": {
+    "analytics": "2b4b3d6f-1693-4c3e-801c-31cf5163745e"
+  }
 }
