@@ -32,7 +32,7 @@ export class LoginService {
           timer: 1500
         })
 
-        this.router.navigate(['/signIn']);
+        this.router.navigate(['/sign-in']);
 
       })
       .catch(err => {
