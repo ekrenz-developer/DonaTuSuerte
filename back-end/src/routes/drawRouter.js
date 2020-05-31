@@ -14,12 +14,14 @@ const drawRouter = server => {
   );
   server.post(
     '/api/v1/stores/:idStore/draws',
+    middlewares.uploadMemory.single('photo'),
     middlewares.Auth.isAuth,
     middlewares.Role.isOrganization,
     DrawController.insert
   );
   server.put(
     '/api/v1/draws/:_id',
+    middlewares.uploadMemory.single('photo'),
     middlewares.Auth.isAuth,
     middlewares.Role.isOrganization,
     DrawController.update
