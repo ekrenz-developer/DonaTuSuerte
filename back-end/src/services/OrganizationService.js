@@ -62,7 +62,7 @@ class OrganizationService extends Service {
   async update(id, data, idUser) {
     try {
       if (!Types.ObjectId.isValid(id)) {
-        throw new error.ErrorHandler('Invalid organization', 400);
+        throw new error.ErrorHandler('Invalid id', 400);
       }
 
       //  Si la organizacion no pertenece al usuario, no esta autorizado
@@ -106,22 +106,29 @@ class OrganizationService extends Service {
       }
 
       //  Si la organizacion tiene un sorteo vigente no la puedo eliminar
-      organization.stores.forEach(async (store) => {
-        store.forEach(async (draw) => {
-          if (draw.status === 3) {
-            throw new error.ErrorHandler('The organization has a valid drawing', 403);
-          } 
+      if (organization.stores) {
+        organization.stores.forEach(store => {
+          if (store.draws) {
+            store.draws.forEach(draw => {
+              if (draw.status === 3) {
+                throw new error.ErrorHandler('The organization has a valid drawing', 403);
+              } 
+            })
+          }
         })
-      });
+      }
 
       //  Elimino todos los sorteos, sucursales y organizaciones (en ese orden respectivamente)
-      organization.stores.forEach(async (store) => {
-        store.forEach(async (draw) => {
-          deletedDraw = await this.Draw.findByIdAndDelete(draw._id);
-        })
-
-        deletedStore = await this.Store.findByIdAndDelete(store._id);
-      });
+      if (organization.stores) {
+        organization.stores.forEach(async (store) => {
+          if (store.draws) {
+            store.draws.forEach(async (draw) => {
+              deletedDraw = await this.Draw.findByIdAndDelete(draw._id);
+            })
+          }
+          deletedStore = await this.Store.findByIdAndDelete(store._id);
+        });
+      }
 
       let deletedOrganization = await this.model.findByIdAndDelete(id);
 

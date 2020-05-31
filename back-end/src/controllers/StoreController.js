@@ -1,19 +1,18 @@
 import Controller from './Controller';
-import OrganizationService from '../services/OrganizationService';
+import StoreService from '../services/StoreService';
 
-const organizationService = new OrganizationService();
+const storeService = new StoreService();
 
-class OrganizationController extends Controller {
+class StoreController extends Controller {
   constructor(service) {
     super(service);
     this.insert = this.insert.bind(this);
-    this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
   async insert(req, res, next) {
     try {
-      let response = await this.service.insert(req.body, req.user._id);
+      let idOrg = req.params._id;
+      let response = await this.service.insert(req.body, idOrg, req.user._id);
       return res.status(response.statusCode).send(response);
     } catch (err) {
       next(err);
@@ -41,4 +40,4 @@ class OrganizationController extends Controller {
   }
 }
 
-export default new OrganizationController(organizationService);
+export default new StoreController(storeService);
