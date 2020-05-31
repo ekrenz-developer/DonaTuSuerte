@@ -7,6 +7,8 @@ import Raffle from '../models/Raffle';
 import Store from '../models/Store';
 import Status from '../models/Status';
 import error from '../helpers/error'
+import uploadClodinary from '../utils/uploadCloudinary';
+import config from '../config/index';
 
 const populate = {
   path: 'status store raffles winner'
@@ -52,7 +54,7 @@ class DrawService extends Service {
     this.enter = this.enter.bind(this);
   }
 
-  async insert(idStore, data, idUser) {
+  async insert(idStore, data, idUser, file) {
     try {
       if (!Types.ObjectId.isValid(idStore)) {
         throw new error.ErrorHandler('Invalid id', 400);
@@ -73,6 +75,18 @@ class DrawService extends Service {
         throw new error.ErrorHandler('Status required not defined', 500);
       }
 
+      let photo = '';
+      if (file) {
+        const options = {
+          folder: config.CLOUDINARY_FOLDER,
+          unique_filename: true,
+          resource_type: 'image'
+        };
+
+        const result = await uploadClodinary(file, options);
+        photo = result.secure_url;
+      }
+
       let createDraw = {
         ...data,
         status: status._id,
@@ -80,7 +94,8 @@ class DrawService extends Service {
         scoreRaffle: scoreRaffle,
         reqRaffles: reqRaffles,
         raffles: [],
-        store: idStore
+        store: idStore,
+        photo: photo
       }
 
       let draw = await this.model.create(createDraw);

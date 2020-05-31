@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import uploadClodinary from '../utils/uploadCloudinary';
 import User from '../models/User';
 import error from '../helpers/error'
+import config from '../config/index';
 
 const populate = {
   path: 'role',
@@ -34,10 +35,10 @@ class UserService extends Service {
 
       const payload = {
         sub: user.email,
-        exp: Date.now() + parseInt(process.env.JWT_LIFETIME),
+        exp: Date.now() + parseInt(config.JWT_LIFETIME),
         firstName: user.firstName
       }
-      const token = jwt.sign(JSON.stringify(payload), process.env.KEY);
+      const token = jwt.sign(JSON.stringify(payload), config.KEY);
 
       return {
         error: false,
@@ -63,12 +64,12 @@ class UserService extends Service {
         throw new error.ErrorHandler('User already registered', 404);
       }
 
-      const hash = await bcrypt.hash(password, parseInt(process.env.BCRYPT_ROUNDS));
+      const hash = await bcrypt.hash(password, parseInt(config.BCRYPT_ROUNDS));
 
       let photo = '';
       if (file) {
         const options = {
-          folder: process.env.CLOUDINARY_FOLDER,
+          folder: config.CLOUDINARY_FOLDER,
           unique_filename: true,
           resource_type: 'image'
         };
