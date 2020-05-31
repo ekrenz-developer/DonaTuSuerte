@@ -19,6 +19,7 @@ import { DashboardNavbarComponent } from './dashboard/dashboard-navbar/dashboard
 import { SidebarOrganizationComponent } from './sidebar/sidebar-organization/sidebar-organization.component';
 import { SidebarCompetitorComponent } from './sidebar/sidebar-competitor/sidebar-competitor.component';
 import { SidebarCheckerComponent } from './sidebar/sidebar-checker/sidebar-checker.component';
+import { NavbarLightComponent } from './navbar-light/navbar-light.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { SidebarCheckerComponent } from './sidebar/sidebar-checker/sidebar-check
     DashboardNavbarComponent,
     SidebarOrganizationComponent,
     SidebarCompetitorComponent,
-    SidebarCheckerComponent
+    SidebarCheckerComponent,
+    NavbarLightComponent
   ],
   imports: [
     BrowserModule,
