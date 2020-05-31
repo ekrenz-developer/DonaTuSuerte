@@ -1,7 +1,7 @@
 
 img {
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
 
 }
 
@@ -19,6 +19,7 @@ a, a:hover, a:focus {
   height: 100%;
   max-height: calc(150vh - 8rem);
   overflow-y: auto;
+  top: 0px;
   /*  */
 
 }
@@ -48,7 +49,7 @@ a, a:hover, a:focus {
   padding: 20px;
   background: rgb(190, 190, 190);
   background-image: url("/assets/images/1.jpg");
-  margin-top: 45px;
+
 
 }
 

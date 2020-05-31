@@ -2,13 +2,16 @@
 
   <div>
     <hr>
-    <div class="container">
-      <div class="card">
-        <img src="{{user.photo}}" class="card-img-top" alt="...">
-      </div>
-        <div class="card-body">
+    <div class="container border">
+      <h3>{{user.firstName}}</h3>
+      <!-- <div class="card"> -->
+        <hr>
+        <div class="row">
+        <img src="{{user.photo}}" class="rounded-circle" alt="...">
+      <!-- </div> -->
+        <!-- <div class="card-body">
           <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
-        </div>
+        </div> -->
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Mail: {{user.email}}</li>
           <li class="list-group-item">Pais: {{user.country}}</li>
@@ -17,12 +20,14 @@
           <li class="list-group-item">Acepto Condiciones: {{user.conditions}}</li>
 
         </ul>
-        <div class="card-body">
+      </div>
+      <hr>
+        <!-- <div class="card-body">
           <button class="btn btn-info">Editar Perfil</button>
 
           <button class="btn btn-danger">Cerrar Sesion</button>
         </div>
-      </div>
+      </div> -->
       <div class="card">
         <li class="list-group-item">Puntos <h2>{{user.score}}</h2>
         </li>
