@@ -78,4 +78,22 @@ export class DrawService {
     console.log ( body )
     return this.request.post (uri,body).then (data => {return data})
   }
+
+
+  executeDraw ( drawId )
+  {
+    let uri = 'draws/' + drawId +  '/run'
+    this.request.post ( uri  , null).then ( data => 
+      {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sorteado realizado con exíto',
+          text : '',
+          showConfirmButton: false,
+          timer: 1500
+        }).then ( data => {
+          window.location.reload()
+        })
+      })
+  }
 }
