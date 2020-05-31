@@ -22,6 +22,7 @@ import { SidebarCheckerComponent } from './sidebar/sidebar-checker/sidebar-check
 import { NavbarLightComponent } from './navbar-light/navbar-light.component';
 import { DashboardCompetitorComponent } from './dashboard/dashboard-competitor/dashboard-competitor.component';
 import { DrawComponent } from './draws/draw/draw.component';
+import { DrawListComponent } from './draws/draw-list/draw-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { DrawComponent } from './draws/draw/draw.component';
     SidebarCheckerComponent,
     NavbarLightComponent,
     DashboardCompetitorComponent,
-    DrawComponent
+    DrawComponent,
+    DrawListComponent
   ],
   imports: [
     BrowserModule,
