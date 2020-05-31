@@ -67,6 +67,7 @@ export class LoginService {
           showConfirmButton: false,
           timer: 1500
         })
+        this.router.navigate ( ['/dashboard-organization'])
       })
       .catch(err => {
         console.log(err)
