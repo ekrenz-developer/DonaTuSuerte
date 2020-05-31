@@ -61,8 +61,10 @@ class DrawController extends Controller {
 
   async run(req, res, next) {
     try {
-      let response = await this.service.run(idUser, idDraw);
-      
+      let idDraw = req.params._id;
+
+      let response = await this.service.run(idDraw);
+
       return res.status(response.statusCode).send(response);
     } catch (err) {
       next(err)

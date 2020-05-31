@@ -11,7 +11,10 @@ import uploadClodinary from '../utils/uploadCloudinary';
 import config from '../config/index';
 
 const populate = {
-  path: 'status store raffles winner'
+  path: 'status store raffles winner',
+  populate: {
+    path: 'draws'
+  }
 }
 
 const belongsUser = async(idStore, Model ,idUser, getOrgId = false) => {
@@ -216,12 +219,56 @@ class DrawService extends Service {
         data: user
       };
     } catch (err) {
-      return {
-        error: true,
-        statusCode: 500,
-        message: err
-      };
+      throw err
     }
+  }
+
+  async run(idDraw) {
+    try {
+      //  Esta logica es provisoria para la demo, la idea es correr un batch que ejecute los sorteos todos los dias a cierta hora
+
+      if (!Types.ObjectId.isValid(idDraw)) {
+        throw new error.ErrorHandler('Invalid id', 400);
+      }
+
+      let statusFinal = await this.Status.findOne({ status: 5 });
+      if (!statusFinal) {
+        throw new error.ErrorHandler('Status collection not defined')
+      }
+
+      let draw = await this.model
+        .findById(idDraw)
+        .populate(populate)
+
+      if (!draw) {
+        throw new error.ErrorHandler('Draw not found', 400);
+      }
+
+      let min = 0,
+          max = draw.reqRaffles;
+
+      let index = min + Math.floor((max - min) * Math.random());
+
+      let winner = draw.raffles[index].user;
+      
+      const newDraw = {
+        winner: Types.ObjectId(winner),
+        status: statusFinal._id
+      };
+      
+      let updatedDraw = await this.model
+        .findByIdAndUpdate(idDraw, newDraw, { new: true, upsert: true })
+        .populate(populate);
+
+      return {
+        error: false,
+        statusCode: 202,
+        data: updatedDraw
+      };      
+    } catch (err) {
+      throw err
+    }
+
   }
 };
 
