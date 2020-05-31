@@ -82,18 +82,25 @@ export class DrawService {
 
   executeDraw ( drawId )
   {
-    let uri = 'draws/' + drawId +  '/run'
+    let uri = '/draws/' + drawId +  '/run'
     this.request.post ( uri  , null).then ( data => 
       {
-        Swal.fire({
-          icon: 'success',
-          title: 'Sorteo realizado con exíto',
-          text : '',
-          showConfirmButton: false,
-          timer: 1500
-        }).then ( data => {
-          window.location.reload()
+        let response : any = data; 
+        console.log ( data )
+        this.request.getUser( '/users/' , response.data.winner ).then ( data => {
+          let res : any = data ; 
+          res = res.data ; 
+            Swal.fire({
+              icon: 'success',
+              title: 'Sorteo realizado con exíto',
+              text : 'Ganador : ' + res.email,
+              showConfirmButton: true,
+              timer: 3500
+            }).then ( data => {
+              window.location.reload()
+            })
         })
+        
       })
   }
 }
