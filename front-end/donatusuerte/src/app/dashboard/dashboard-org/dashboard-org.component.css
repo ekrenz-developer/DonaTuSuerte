@@ -15,11 +15,21 @@ button{
 
 .content {
   background-color: darkgray;
+  background-image: url("/assets/images/blur1.jpg");
+
   padding:20px;
   margin-top:55px;
   padding-top:165px;
-  height:700px;
+  height:1500px;
 }
 .btn {
   margin: 20px;
+}
+.container {
+  background-color: rgba(0, 0, 0, 0.384);
+  color: white;
+}
+.h3 {
+  color: white;
+
 }
