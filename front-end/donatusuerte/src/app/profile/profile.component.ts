@@ -12,30 +12,11 @@ export class ProfileComponent implements OnInit {
 
   user :any;
 
-  constructor(  private orgService : OrganizationService )
+  constructor(  )
   {
     this.user = JSON.parse( localStorage.getItem ( 'user' ) ); 
   }
 
-  organization = 
-  {
-    "cuit"  : Number,
-    "name"  : ""
-  }
-
   ngOnInit() {
   }
-
-
-  registerOrganization()
-  {
-    console.warn ( "request : create organization")
-    this.orgService.createOrganization( this.organization ).then ( data => {
-      let response: any = data;
-      localStorage.setItem ('organization' , JSON.stringify ( response.data ) );
-      console.log ( response.data )
-      Swal.fire ( 'Organizacion registrada' , 'Ahora puedes crear sucursales y sorteos' , "success")
-    } ) ;
-  }
-
 }

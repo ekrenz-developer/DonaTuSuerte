@@ -43,6 +43,32 @@ export class DashboardOrgComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  organization = 
+  {
+    "cuit"  : Number,
+    "name"  : ""
+  }
+
+  registerOrganization()
+  {
+    console.warn ( "request : create organization")
+    this.orgService.createOrganization( this.organization ).then ( data => {
+      let response: any = data;
+      localStorage.setItem ('organization' , JSON.stringify ( response.data ) );
+      console.log ( response.data )
+      Swal.fire({
+        icon: 'success',
+        title: 'Organizacion registrada con éxito',
+        text : 'Ahora puedes crear sucursales y sorteos',
+        showConfirmButton: false,
+        timer: 1500
+      }).then ( data => {
+        window.location.reload()
+      })
+      
+    } ) ;
+  }
+
   loadStores(id) {
     console.warn('get organization ' + id)
 
@@ -84,17 +110,22 @@ export class DashboardOrgComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
 
         this.orgService.deleteOrganization(this.organizationSelected._id)
           .then(data => {
-            Swal.fire(
-              'Organizacion eliminada con éxito',
-              'Se reflejará en tu lista de organizaciones',
-              'success'
-            )
+            Swal.fire({
+              icon: 'success',
+              title: 'Organizacion eliminada con éxito',
+              text : 'Se reflejará en tu lista de organizaciones',
+              showConfirmButton: false,
+              timer: 1500
+            }).then ( data => {
+              window.location.reload()
+            })
           })
 
       }

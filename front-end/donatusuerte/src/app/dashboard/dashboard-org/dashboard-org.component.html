@@ -1,7 +1,5 @@
-
-
 <div class="content">
-    <div class="list-group">
+  <div class="list-group">
     <div *ngIf="showOrganizations">
       <h3>Organizaciones</h3>
       <hr>
@@ -14,6 +12,29 @@
         </div>
         <p class="mb-1">CUIT : {{organization.cuit}}</p>
       </a>
+
+      <div><hr>
+        <button type="button" class="btn btn-primary" (click)="newStore()" data-toggle="collapse" href="#collapseExample" aria-controls="collapseExample">Crear sucursal</button>
+  
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+    
+              <div class="form-group">
+                <label for="exampleInputEmail1" >CUIT</label>
+                <input [(ngModel)]="organization.cuit" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Nombre de Organizacion</label>
+                <input [(ngModel)]="organization.name" type="text" class="form-control" id="exampleInputPassword1" required="true">
+              </div>
+              <button class="btn btn-primary" type="submit" (click)="registerOrganization()">Registrarme</button>
+    
+          </div>
+        </div>
+        
+    </div>
+    
+      
     </div>
   </div>
 
