@@ -219,10 +219,16 @@
   <h6>Actualizado el : {{drawSelected.updatedAt}}</h6>
 
   <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-warning" (click)="goBackDraws()">  <strong> [ SORTEAR ! ] </strong></button>
+  </div>
+
+
+  <div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseUpdateDraw"
       aria-controls="collapseUpdateDraw"> / Editar Sorteo</button>
     <button type="button" class="btn btn-danger" (click)="deleteDraw()"> X Eliminar Sorteo</button>
     <button type="button" class="btn btn-info" (click)="goBackDraws()">  << Volver</button>
+    <button type="button" class="btn btn-warning" (click)="goBackDraws()">  <strong> [ SORTEAR ! ] </strong></button>
   </div>
 
   <div class="collapse card card-body" id="collapseUpdateDraw">
