@@ -10,3 +10,9 @@ button{
   background-color: white;
   padding: 2%;
 }
+
+.content {
+  margin-left: 250px;
+  background-color: darkgray;
+  padding: 20px;
+}
