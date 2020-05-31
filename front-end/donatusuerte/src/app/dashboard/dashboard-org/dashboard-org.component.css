@@ -12,14 +12,13 @@ button{
 }
 
 #formNewStore #collapseCreateDraw{
-  /* background-color: white; */
+  background-image: url("/assets/images/blur1.jpg");
   padding: 2%;
 }
 
 .content {
   background-color: darkgray;
   background-image: url("/assets/images/blur1.jpg");
-
   padding:20px;
   margin-top:55px;
   padding-top:165px;

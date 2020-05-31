@@ -12,3 +12,11 @@
 .list-group {
   margin-left: 50px;
 }
+.content {
+
+ background-image: url("/assets/images/blur1.jpg");
+ height: 1080px;
+}
+.li {
+  background-color: rgb(133, 80, 0);
+}
