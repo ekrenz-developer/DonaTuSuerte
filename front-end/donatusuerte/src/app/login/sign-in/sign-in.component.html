@@ -1,0 +1,19 @@
+<video autoplay muted loop id="myVideo">
+  <source src="assets/video/video1.mp4" type="video/mp4" >
+</video>
+
+<div class="container rounded">
+  <img class="userlogin" src="assets/images/userlogin.png" alt="10"><br> <br>
+    <div class="card">
+      <label  for="name">Email</label>
+        <input [(ngModel)]="user.email" id="email" class="form-control"type="email"> <br>
+
+        <label  for="pass">Contraseña</label>
+        <input   [(ngModel)]="user.password" id="pass" class="form-control"type="password"> <br><br>
+        <button class="btn btn-info" (click)="signIn()"> Iniciar Sesion </button> <br>
+        <label for="">¿No tienes cuenta?</label>
+        <a class="btn btn-secondary" href="/sign-up"> Registrarme </a>
+     </div>
+      <hr>
+ 
+</div>
