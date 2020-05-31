@@ -148,4 +148,52 @@ export class DashboardOrgComponent implements OnInit {
     this.showOrganizations = true;
   }
 
+
+  deleteStore ()
+  {
+    Swal.fire({
+      title: '¿Seguro que quiere proceder?',
+      text: "Se eliminarán todos los sorteos",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+
+        this.storeService.deleteStore ( this.storeSelected._id , this.organizationSelected._id )
+        .then ( data => {
+          Swal.fire(
+            'Sucursal eliminada con éxito',
+            'Se reflejará en tu lista de sucursales',
+            'success'
+          )
+        })
+      }
+    })
+  }
+
+  goBackStores()
+  {
+    this.showStores = true;
+    this.showDraws = false;
+  }
+
+
+  updateStore()
+  {
+    this.request.updateStore( this.storeSelected )
+    .then ( data => {
+       
+      Swal.fire({
+        icon: 'success',
+        title: 'Sucursal Actualiazada con éxito',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    });
+  }
+  
+
 }
