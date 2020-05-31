@@ -1,6 +1,6 @@
 <div class="content">
   <div class="list-group">
-    <div *ngIf="showOrganizations" class="container">
+    <div *ngIf="showOrganizations" class="container ">
       <h3>Organizaciones</h3>
       <hr>
       <a *ngFor="let organization of user.organizations"
@@ -51,20 +51,20 @@
     <h3>Sucursales</h3>
     <ul class="list-group" *ngFor="let store of organizationSelected.stores">
       <a (click)="loadDraws( store._id )"
-        class="btn list-group-item d-flex justify-content-between align-items-center ">
+        class="shadow  btn list-group-item d-flex justify-content-between align-items-center  ">
         {{store.name}}
         <span class="badge badge-primary badge-pill">Sorteos activos : {{store.draws.length}}</span>
       </a>
     </ul>
-    <hr>
+
 
 
     <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#collapseExample"> / Editar
+      <button type="button" class="shadow  btn btn-primary" data-toggle="collapse" data-target="#collapseExample">Editar
         Organizacion</button>
-      <button type="button" class="btn btn-danger" (click)="deleteOrganization()">Eliminar Organizacion</button>
-      <button type="button" class="btn btn-primary" (click)="newStore()">Crear sucursal</button>
-      <button type="button" class="btn btn-info" (click)="goBackOrganizations()">Volver</button>
+      <button type="button" class="shadow btn btn-danger" (click)="deleteOrganization()">Eliminar Organizacion</button>
+      <button type="button" class="shadow btn btn-secondary" (click)="newStore()">Crear sucursal</button>
+      <button type="button" class="shadow btn btn-info" (click)="goBackOrganizations()">Volver</button>
     </div>
 
 
@@ -82,7 +82,7 @@
           <input [(ngModel)]="organizationSelected.name" type="text" class="form-control" id="exampleInputPassword1"
             required="true">
         </div>
-        <button class="btn btn-warning" type="submit" (click)="updateOrganization()">Editar</button>
+        <button class="btn btn-success" type="submit" (click)="updateOrganization()">Aceptar</button>
 
       </div>
     </div>
@@ -115,9 +115,9 @@
       <button type="submit" class="btn btn-primary" (click)="createNewStore()">Agregar</button>
     </div>
   </div>
-</div>
 
-<div *ngIf="showDraws" id="stores" class="list-group container">
+
+  <div *ngIf="showDraws" id="stores" class="list-group container">
   <h2>Sucursal: {{storeSelected.name}}</h2>
   <strong> Organizacion : {{organizationSelected.name}}</strong>
   <hr>
@@ -132,8 +132,8 @@
   <h3>Sorteos</h3>
 
   <ul class="list-group" *ngFor="let draw of storeSelected.draws">
-    
-    <a (click)="loadDraw( draw._id )" class="btn list-group-item d-flex justify-content-between align-items-center ">
+
+    <a (click)="loadDraw( draw._id )" class="shadow btn list-group-item d-flex justify-content-between align-items-center ">
       <img src="{{draw.photo}}" alt="" style="width: 40px;">
       {{draw.description}}
       <span class="badge badge-primary badge-pill">Premio : ${{draw.prize}}</span>
@@ -141,13 +141,13 @@
   </ul>
 
 
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-warning" data-toggle="collapse" href="#collapseUpdateStore"
-      aria-controls="collapseUpdateStore"> / Editar Sucursal</button>
-    <button type="button" class="btn btn-danger" (click)="deleteStore()"> X Eliminar Sucursal</button>
-    <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseCreateDraw"
-      aria-controls="collapseCreateDraw"> + Crear Sorteo </button>
-    <button type="button" class="btn btn-info" (click)="goBackStores()">
+  <div class="shadow btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseUpdateStore"
+      aria-controls="collapseUpdateStore"> Editar Sucursal</button>
+    <button type="button" class="shadow btn btn-danger" (click)="deleteStore()"> X Eliminar Sucursal</button>
+    <button type="button" class="shadow btn btn-secondary" data-toggle="collapse" href="#collapseCreateDraw"
+      aria-controls="collapseCreateDraw"> Crear Sorteo </button>
+    <button type="button" class="shadow btn btn-info" (click)="goBackStores()">
       << Volver</button>
   </div>
 
@@ -175,7 +175,7 @@
         <input [(ngModel)]="storeSelected.address.country" type="text" class="form-control">
       </div>
 
-      <button type="submit" class="btn btn-warning" (click)="updateStore()">Editar</button>
+      <button type="submit" class="btn btn-success" (click)="updateStore()">Aceptar</button>
 
     </div>
   </div>
@@ -201,15 +201,18 @@
 
   </div>
 
-</div>
+  </div>
 
 
 
-<div *ngIf="showDraw" id="stores" class="container">
+  <div *ngIf="showDraw" id="stores" class="container">
   <h2>Sorteo: {{drawSelected.description}}</h2>
   <strong> Estado : {{drawSelected.status.description}}</strong>
   <hr>
   <img src="{{drawSelected.photo}}" alt="" style="width: 270px;">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-warning" (click)="executeDraw()">  <strong> [ SORTEAR ! ] </strong> </button>
+  </div>
   <hr>
   <h6>Puntos: {{drawSelected.score}}</h6>
   <h6>Punto requeridos por rifa : {{drawSelected.scoreRaffle}}</h6>
@@ -218,8 +221,11 @@
   <h6>Creado el : {{drawSelected.createdAt}}</h6>
   <h6>Actualizado el : {{drawSelected.updatedAt}}</h6>
 
+ 
+
+
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-warning" data-toggle="collapse" href="#collapseUpdateDraw"
+    <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseUpdateDraw"
       aria-controls="collapseUpdateDraw"> / Editar Sorteo</button>
     <button type="button" class="btn btn-danger" (click)="deleteDraw()"> X Eliminar Sorteo</button>
     <button type="button" class="btn btn-info" (click)="goBackDraws()">  << Volver</button>
@@ -246,8 +252,9 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-warning" (click)="updateDraw()"> / Editar</button>
+    <button type="submit" class="btn btn-success" (click)="updateDraw()"> Aceptar</button>
 
   </div>
 
+  </div>
 </div>
