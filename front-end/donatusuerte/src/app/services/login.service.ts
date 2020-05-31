@@ -89,4 +89,18 @@ export class LoginService {
     return this.request.get ( uri ).then( data => { return data} )
   }
 
+
+  
+  getUser ()
+  {
+    let uri = '/users'
+
+    return this.request.get( uri ).then ( data => { 
+      let response:any = data;
+      localStorage.setItem('user', JSON.stringify( response.data ));
+      console.log ( response.data )
+      return response; 
+    }) 
+  }
+
 }

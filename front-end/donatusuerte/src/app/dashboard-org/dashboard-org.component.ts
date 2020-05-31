@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-dashboard-org',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardOrgComponent implements OnInit {
 
-  constructor() { }
+
+  user : any
+  showOrganizations = true;
+
+  constructor( private router : Router , private login : LoginService) { 
+    this.user = JSON.parse( localStorage.getItem ( 'user' ) ); 
+    this.updateComponent()
+  }
+
+  updateComponent(){
+    this.login.getUser().then(data => {
+      let response:any = data;
+      this.user = response.data;
+
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  loadStores( id )
+  {
+    console.warn ('todo: loadStores()' + id)
   }
 
 }
