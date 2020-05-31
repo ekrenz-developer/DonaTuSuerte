@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardOrgComponent } from './dashboard-org/dashboard-org.component';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { DashboardOrgComponent } from './dashboard-org/dashboard-org.component';
     SignUpComponent,
     NavbarComponent,
     SidebarComponent,
-    DashboardOrgComponent
+    DashboardOrgComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
