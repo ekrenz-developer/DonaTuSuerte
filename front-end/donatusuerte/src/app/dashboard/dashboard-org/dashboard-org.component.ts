@@ -22,12 +22,11 @@ export class DashboardOrgComponent implements OnInit {
   storeSelected: any;
 
   constructor(
-    private router: Router, 
-    private login: LoginService, 
-    private orgService: OrganizationService, 
-    private storeService : StoreService,
-    private drawService : DrawService) 
-    {
+    private router: Router,
+    private login: LoginService,
+    private orgService: OrganizationService,
+    private storeService: StoreService,
+    private drawService: DrawService) {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.updateComponent()
   }
@@ -43,37 +42,35 @@ export class DashboardOrgComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  organization = 
-  {
-    "cuit"  : Number,
-    "name"  : ""
-  }
+  organization =
+    {
+      "cuit": Number,
+      "name": ""
+    }
 
-  registerOrganization()
-  {
-    this.orgService.createOrganization( this.organization );
+  registerOrganization() {
+    this.orgService.createOrganization(this.organization);
   }
 
   loadStores(id) {
-    this.user.organizations.forEach( organization => {
-      if ( organization._id == id )
-      {
+    this.user.organizations.forEach(organization => {
+      if (organization._id == id) {
         this.organizationSelected = organization;
       }
     });
 
     this.showOrganizations = false;
-      this.showStores = true;
+    this.showStores = true;
   }
 
   loadDraws(id) {
-    this.organizationSelected.stores.forEach(store => {
-      if (store._id == id) {
-        this.storeSelected = store;
-      }
-    });
-    this.showDraws = true;
-    this.showStores = false;
+    this.storeService.getStore(id).then(data => {
+      let response: any = data;
+      this.storeSelected = response.data;
+      this.showDraws = true;
+      this.showStores = false;
+      console.log ( this.storeSelected )
+    })
   }
 
 
@@ -89,47 +86,46 @@ export class DashboardOrgComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.orgService.deleteOrganization(this.organizationSelected._id)}
+        this.orgService.deleteOrganization(this.organizationSelected._id)
+      }
     })
   }
 
-  updateOrganization(){
-    this.orgService.updateOrganization( this.organizationSelected );
+  updateOrganization() {
+    this.orgService.updateOrganization(this.organizationSelected);
   }
 
 
   showNewStoreForm = false;
-  newStore(){
+  newStore() {
     this.showNewStoreForm = true;
   }
 
- store = 
-  {
-    "name": "",
-    "address": {
-      "street": "",
-      "city": "",
-      "state": "",
-      "postalCode": "",
-      "country": "",
-      "lat": "-34.61020399",
-      "lon": "-58.42448026"
+  store =
+    {
+      "name": "",
+      "address": {
+        "street": "",
+        "city": "",
+        "state": "",
+        "postalCode": "",
+        "country": "",
+        "lat": "-34.61020399",
+        "lon": "-58.42448026"
+      }
     }
+
+  createNewStore() {
+    this.storeService.addStore(this.store, this.organizationSelected._id)
   }
 
-  createNewStore ()
-  {
-    this.storeService.addStore ( this.store , this.organizationSelected._id )
-  }
-
-  goBackOrganizations(){
+  goBackOrganizations() {
     this.showStores = false;
     this.showOrganizations = true;
   }
 
 
-  deleteStore ()
-  {
+  deleteStore() {
     Swal.fire({
       title: '¿Seguro que quiere proceder?',
       text: "Se eliminarán todos los sorteos",
@@ -141,46 +137,71 @@ export class DashboardOrgComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.storeService.deleteStore ( this.storeSelected._id , this.organizationSelected._id )
+        this.storeService.deleteStore(this.storeSelected._id, this.organizationSelected._id)
       }
     })
   }
 
-  goBackStores()
-  {
+  goBackStores() {
     this.showStores = true;
     this.showDraws = false;
   }
 
 
-  updateStore()
-  {
-    this.storeService.updateStore( this.storeSelected )
+  updateStore() {
+    this.storeService.updateStore(this.storeSelected)
   }
 
   formData = new FormData();
 
-  newDraw = 
-  {
-    "description" : "",
-    "prize" : null,
-    "photo" : ""
-  }
+  newDraw =
+    {
+      "description": "",
+      "prize": null,
+      "photo": ""
+    }
 
-  addDraw()
-  {
+  addDraw() {
     Object.keys(this.newDraw).forEach((key) => { this.formData.append(key, this.newDraw[key]) });
     Object.keys(this.newDraw).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
 
-    this.drawService.createDraw ( this.formData , this.storeSelected._id );
+    this.drawService.createDraw(this.formData, this.storeSelected._id);
 
   }
 
-  
-  onFileSelected(event)
-  {
+  updateDraw() {
+    this.orgService.updateOrganization(this.organizationSelected);
+  }
+
+
+  deleteDraw() {
+    Swal.fire({
+      title: '¿Seguro que quiere proceder?',
+      text: "Se eliminará el sorteo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.storeService.deleteStore(this.storeSelected._id, this.organizationSelected._id)
+      }
+    })
+  }
+
+
+  onFileSelected(event) {
     this.formData.append('photo', event.target.files[0])
-    console.log ( event.target.files[0])
+    console.log(event.target.files[0])
+  }
+
+
+
+  loadDraw ( idDraw )
+  {
+    console.log ( idDraw )
   }
 
 }

@@ -11,7 +11,7 @@ export class DrawService {
 
   createDraw ( body , storeId )
   {
-    let uri = '/stores' + storeId + '/draws'
+    let uri = '/stores/' + storeId + '/draws'
     this.request.post ( uri , body )
     .then ( data => 
       {

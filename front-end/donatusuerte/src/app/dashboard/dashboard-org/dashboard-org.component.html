@@ -13,28 +13,32 @@
         <p class="mb-1">CUIT : {{organization.cuit}}</p>
       </a>
 
-      <div><hr>
-        <button type="button" class="btn btn-primary" (click)="newStore()" data-toggle="collapse" href="#collapseExample" aria-controls="collapseExample">Crear organizacion</button>
-  
+      <div>
+        <hr>
+        <button type="button" class="btn btn-primary" (click)="newStore()" data-toggle="collapse"
+          href="#collapseExample" aria-controls="collapseExample">Crear organizacion</button>
+
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
-    
-              <div class="form-group">
-                <label for="exampleInputEmail1" >CUIT</label>
-                <input [(ngModel)]="organization.cuit" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Nombre de Organizacion</label>
-                <input [(ngModel)]="organization.name" type="text" class="form-control" id="exampleInputPassword1" required="true">
-              </div>
-              <button class="btn btn-primary" type="submit" (click)="registerOrganization()">Registrarme</button>
-    
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">CUIT</label>
+              <input [(ngModel)]="organization.cuit" type="number" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" required="true">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Nombre de Organizacion</label>
+              <input [(ngModel)]="organization.name" type="text" class="form-control" id="exampleInputPassword1"
+                required="true">
+            </div>
+            <button class="btn btn-primary" type="submit" (click)="registerOrganization()">Registrarme</button>
+
           </div>
         </div>
 
-    </div>
-    
-      
+      </div>
+
+
     </div>
   </div>
 
@@ -125,12 +129,22 @@
 
   <br>
 
+  <h3>Sorteos</h3>
+
+  <ul class="list-group" *ngFor="let draw of storeSelected.draws">
+    <a (click)="loadDraw( draw._id )" class="btn list-group-item d-flex justify-content-between align-items-center ">
+      {{draw.description}}
+      <span class="badge badge-primary badge-pill">Premio : ${{draw.prize}}</span>
+    </a>
+  </ul>
+
+
   <div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-warning" data-toggle="collapse" href="#collapseUpdateStore"
       aria-controls="collapseUpdateStore"> / Editar Sucursal</button>
     <button type="button" class="btn btn-danger" (click)="deleteStore()"> X Eliminar Sucursal</button>
     <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseCreateDraw"
-      aria-controls="collapseCreateDraw" > + Crear Sorteo </button>
+      aria-controls="collapseCreateDraw"> + Crear Sorteo </button>
     <button type="button" class="btn btn-info" (click)="goBackStores()">
       << Volver</button>
   </div>
