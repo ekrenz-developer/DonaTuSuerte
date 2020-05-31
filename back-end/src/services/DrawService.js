@@ -258,7 +258,7 @@ class DrawService extends Service {
       
       let updatedDraw = await this.model
         .findByIdAndUpdate(idDraw, newDraw, { new: true, upsert: true })
-        .populate(populate);
+        //.populate(populate);
 
       return {
         error: false,
