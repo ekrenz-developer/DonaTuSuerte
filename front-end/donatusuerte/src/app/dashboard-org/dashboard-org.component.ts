@@ -46,12 +46,22 @@ export class DashboardOrgComponent implements OnInit {
   loadStores(id) {
     console.warn('get organization ' + id)
 
-    this.orgService.getOrganization(id).then(data => {
-      this.organizationSelected = data;
-      this.showOrganizations = false;
+    // this.orgService.getOrganization(id).then(data => {
+    //   this.organizationSelected = data;
+    //   this.showOrganizations = false;
+    //   this.showStores = true;
+    //   console.log(data)
+    // })
+
+    this.user.organizations.forEach( organization => {
+      if ( organization._id == id )
+      {
+        this.organizationSelected = organization;
+      }
+    });
+
+    this.showOrganizations = false;
       this.showStores = true;
-      console.log(data)
-    })
   }
 
   loadDraws(id) {
