@@ -2,27 +2,28 @@
 
   position: relative;
   bottom: 0;
-  background: rgba(0, 0, 0,0.85);
+  background: rgba(0, 0, 0,0.2);
   color: #f1f1f1;
   width: 350px;
-
   padding: 30px;
-  margin-top: 70px;
+  margin-top: 170px;
   text-align: center;
 }
 
 #myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url("/assets/images/blur1.jpg");
+
   }
 
 
 .card{
-    background-color: transparent;
-    border: hidden;
+  background-color: transparent;
+  border: hidden;
 
 
 }
