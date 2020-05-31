@@ -1,7 +1,7 @@
 
 img {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
 
   }
 
@@ -19,6 +19,8 @@ img {
     height: 100%;
     max-height: calc(150vh - 8rem);
     overflow-y: auto;
+
+
     /*  */
 
   }
@@ -47,6 +49,7 @@ img {
     padding: 20px;
     background: rgb(190, 190, 190);
     background-image: url("/assets/images/1.jpg");
+
 
   }
 

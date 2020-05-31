@@ -1,6 +1,14 @@
-.card {
+/* .card {
   width: 200px;
-}
+} */
 .container {
   margin-top: 70px;
+  padding: 50px;
+}
+.rounded-circle {
+  width: 250px;
+  height:250px;
+}
+.list-group {
+  margin-left: 350px;
 }
