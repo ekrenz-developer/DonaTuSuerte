@@ -15,7 +15,7 @@ class DrawController extends Controller {
   async insert(req, res, next) {
     try {
       let idStore = req.params.idStore;
-      let response = await this.service.insert(idStore, req.body, req.user._id);
+      let response = await this.service.insert(idStore, req.body, req.user._id, req.file);
       return res.status(response.statusCode).send(response);
     } catch (err) {
       next(err);
