@@ -24,6 +24,7 @@ class OrganizationService extends Service {
     this.insert = this.insert.bind(this);
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
+    this.run = this.run.bind(this);
   }
 
   async insert(body, idUser) {
@@ -144,6 +145,10 @@ class OrganizationService extends Service {
     } catch (err) {
       throw err;
     }
+  }
+
+  async run(idUser, idDraw) {
+    
   }
 }
 

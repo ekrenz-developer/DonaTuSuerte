@@ -10,6 +10,7 @@ class DrawController extends Controller {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
     this.enter = this.enter.bind(this);
+    this.run = this.run.bind(this);
   }
 
   async insert(req, res, next) {
@@ -48,9 +49,19 @@ class DrawController extends Controller {
     try {
       let idUser = req.user._id;
       let countRaffles = req.body.countRaffles;
-      let idDraw = req.param._id;
+      let idDraw = req.params._id;
   
       let response = await this.service.enter(idUser, idDraw, countRaffles);
+      
+      return res.status(response.statusCode).send(response);
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async run(req, res, next) {
+    try {
+      let response = await this.service.run(idUser, idDraw);
       
       return res.status(response.statusCode).send(response);
     } catch (err) {
