@@ -1,1 +1,5 @@
-<p>draw-list works!</p>
+<div *ngIf="draws">
+    <div class="row">
+        <app-draw *ngFor="let draw of draws" [draw]="draw"></app-draw>
+    </div>
+</div>

@@ -1,1 +1,11 @@
-<p>draw works!</p>
+<div class="card" style="width: 18rem;">
+    <img src="{{draw.photo}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h3 class="card-title">Sorteo por : ${{draw.prize}}</h3>
+        <h4>{{draw.description}}</h4>
+        <p class="card-text">Este sorteo fue creado por <br> <strong> {{draw.store.name}}</strong></p>
+    </div>
+    <div class="btn btn-success" (click)="participate()">
+        <h4>Participar</h4>
+    </div>
+</div>

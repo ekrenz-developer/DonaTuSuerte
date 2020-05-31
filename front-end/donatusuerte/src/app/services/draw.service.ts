@@ -9,6 +9,16 @@ export class DrawService {
 
   constructor( private request : RequestService ) { }
 
+
+  getDraws()
+  {
+    console.log ( "asd")
+    return this.request.get ( '/draws' ).then( data => {
+      let response: any = data;
+       return response.data;
+    })
+  }
+  
   createDraw ( body , storeId )
   {
     let uri = '/stores/' + storeId + '/draws'
@@ -56,5 +66,16 @@ export class DrawService {
           window.location.reload()
         })
        })
+  }
+
+  
+  enterDraw ( value , drawId)
+  {
+    let uri = '/draws/' + drawId + '/enter'
+    let body = {
+      "countRaffles": parseInt(value)
+    }
+    console.log ( body )
+    return this.request.post (uri,body).then (data => {return data})
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DrawService } from 'src/app/services/draw.service';
 
 @Component({
   selector: 'app-draw-list',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrawListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private drawService : DrawService)
+  {
+    this.drawService.getDraws().then ( data => 
+      {
+        this.draws = data;
+        console.log ( this.draws )
+      })
+    
+   }
+
+  draws : any = null;
 
   ngOnInit(): void {
   }
+
+
+
 
 }
