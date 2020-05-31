@@ -36,4 +36,10 @@ export class OrganizationService {
 
     return this.request.put ( uri , body  )
   }
+
+  createOrganization( body ) 
+  {
+    return this.request.post (   '/organizations' , body ).then ( data => { return data })
+  }
+
 }
