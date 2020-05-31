@@ -55,8 +55,8 @@
     <div class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#collapseExample"> / Editar
         Organizacion</button>
-      <button type="button" class="btn btn-danger" (click)="deleteOrganization()"> X Eliminar Organizacion</button>
-      <button type="button" class="btn btn-primary" (click)="newStore()">+ Crear sucursal</button>
+      <button type="button" class="btn btn-danger" (click)="deleteOrganization()">Eliminar Organizacion</button>
+      <button type="button" class="btn btn-primary" (click)="newStore()">Crear sucursal</button>
       <button type="button" class="btn btn-info" (click)="goBackOrganizations()">Volver</button>
     </div>
 
@@ -105,7 +105,7 @@
         <input [(ngModel)]="store.address.country" type="text" class="form-control">
       </div>
 
-      <button type="submit" class="btn btn-primary" (click)="createNewStore()">+ Agregar</button>
+      <button type="submit" class="btn btn-primary" (click)="createNewStore()">Agregar</button>
     </div>
   </div>
 </div>
