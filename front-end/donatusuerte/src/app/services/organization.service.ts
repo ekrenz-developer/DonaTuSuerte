@@ -16,4 +16,12 @@ export class OrganizationService {
       return response.data; 
     }) 
   }
+
+
+  deleteOrganization ( orgId )
+  {
+    let uri = '/organizations/' + orgId;
+
+    return this.request.delete ( uri  ).then ( data => {return data })
+  }
 }
