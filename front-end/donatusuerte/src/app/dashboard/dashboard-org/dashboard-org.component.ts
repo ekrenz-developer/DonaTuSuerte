@@ -4,6 +4,7 @@ import { LoginService } from '../../services/login.service';
 import { OrganizationService } from '../../services/organization.service';
 import Swal from 'sweetalert2';
 import { StoreService } from '../../services/store.service';
+import { DrawService } from 'src/app/services/draw.service';
 
 @Component({
   selector: 'app-dashboard-org',
@@ -11,8 +12,6 @@ import { StoreService } from '../../services/store.service';
   styleUrls: ['./dashboard-org.component.css']
 })
 export class DashboardOrgComponent implements OnInit {
-
-
 
   showOrganizations = true;
   showStores = false;
@@ -26,7 +25,8 @@ export class DashboardOrgComponent implements OnInit {
     private router: Router, 
     private login: LoginService, 
     private orgService: OrganizationService, 
-    private storeService : StoreService) 
+    private storeService : StoreService,
+    private drawService : DrawService) 
     {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.updateComponent()
@@ -51,34 +51,10 @@ export class DashboardOrgComponent implements OnInit {
 
   registerOrganization()
   {
-    console.warn ( "request : create organization")
-    this.orgService.createOrganization( this.organization ).then ( data => {
-      let response: any = data;
-      localStorage.setItem ('organization' , JSON.stringify ( response.data ) );
-      console.log ( response.data )
-      Swal.fire({
-        icon: 'success',
-        title: 'Organizacion registrada con éxito',
-        text : 'Ahora puedes crear sucursales y sorteos',
-        showConfirmButton: false,
-        timer: 1500
-      }).then ( data => {
-        window.location.reload()
-      })
-      
-    } ) ;
+    this.orgService.createOrganization( this.organization );
   }
 
   loadStores(id) {
-    console.warn('get organization ' + id)
-
-    // this.orgService.getOrganization(id).then(data => {
-    //   this.organizationSelected = data;
-    //   this.showOrganizations = false;
-    //   this.showStores = true;
-    //   console.log(data)
-    // })
-
     this.user.organizations.forEach( organization => {
       if ( organization._id == id )
       {
@@ -96,7 +72,6 @@ export class DashboardOrgComponent implements OnInit {
         this.storeSelected = store;
       }
     });
-
     this.showDraws = true;
     this.showStores = false;
   }
@@ -114,35 +89,12 @@ export class DashboardOrgComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-
-        this.orgService.deleteOrganization(this.organizationSelected._id)
-          .then(data => {
-            Swal.fire({
-              icon: 'success',
-              title: 'Organizacion eliminada con éxito',
-              text : 'Se reflejará en tu lista de organizaciones',
-              showConfirmButton: false,
-              timer: 1500
-            }).then ( data => {
-              window.location.reload()
-            })
-          })
-
-      }
+        this.orgService.deleteOrganization(this.organizationSelected._id)}
     })
   }
 
   updateOrganization(){
-    this.orgService.updateOrganization( this.organizationSelected )
-    .then ( data => {
-       
-      Swal.fire({
-        icon: 'success',
-        title: 'Organización Actualiazada con éxito',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+    this.orgService.updateOrganization( this.organizationSelected );
   }
 
 
@@ -168,10 +120,6 @@ export class DashboardOrgComponent implements OnInit {
   createNewStore ()
   {
     this.storeService.addStore ( this.store , this.organizationSelected._id )
-    .then ( data => {
-      Swal.fire('Sucursal creada', 'Ahora puedes crear sorteos para dicha sucursal' , 'success')
-    })
-    this.showNewStoreForm = false;
   }
 
   goBackOrganizations(){
@@ -189,18 +137,11 @@ export class DashboardOrgComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-
         this.storeService.deleteStore ( this.storeSelected._id , this.organizationSelected._id )
-        .then ( data => {
-          Swal.fire(
-            'Sucursal eliminada con éxito',
-            'Se reflejará en tu lista de sucursales',
-            'success'
-          )
-        })
       }
     })
   }
@@ -215,16 +156,31 @@ export class DashboardOrgComponent implements OnInit {
   updateStore()
   {
     this.storeService.updateStore( this.storeSelected )
-    .then ( data => {
-       
-      Swal.fire({
-        icon: 'success',
-        title: 'Sucursal Actualiazada con éxito',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
   }
 
+  formData = new FormData();
+
+  newDraw = 
+  {
+    "description" : "",
+    "prize" : null,
+    "photo" : ""
+  }
+
+  addDraw()
+  {
+    Object.keys(this.newDraw).forEach((key) => { this.formData.append(key, this.newDraw[key]) });
+    Object.keys(this.newDraw).forEach((key) => { console.log(key + ": " + this.formData.get(key)) });
+
+    this.drawService.createDraw ( this.formData , this.storeSelected._id );
+
+  }
+
+  
+  onFileSelected(event)
+  {
+    this.formData.append('photo', event.target.files[0])
+    console.log ( event.target.files[0])
+  }
 
 }
