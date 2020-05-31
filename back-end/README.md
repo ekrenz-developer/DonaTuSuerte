@@ -41,6 +41,7 @@ https://api-dona-tu-suerte.herokuapp.com
 | [Update a draw](#Update-a-draw) | PUT | /api/v1/draws/{id} |
 | [Delete a draw](#Delete-a-draw) | DELETE | /api/v1/stores/{id}/draws/{id} |
 | [Enter a draw](#Enter-a-draw) | POST | /api/v1/draws/{id} |
+| [Run a draw](#Run-a-draw) | POST | /api/v1/draws/{id}/run |
 
 ## Get roles
 
@@ -939,6 +940,44 @@ body: {
         "reqRaffles": 200
       }
     ]
+  }
+}
+```
+
+## Run a draw
+
+### Request
+
+`
+POST /api/v1/draws/{id}/run
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+}
+```
+
+### Response
+
+```
+{
+  "error": false,
+  "statusCode": 202,
+  "data": {
+    "photo": "photo",
+    "raffles": [...],
+    "_id": "id",
+    "description": "desc",
+    "prize": "prize,
+    "status": "status",
+    "score": 10,
+    "scoreRaffle": 250,
+    "reqRaffles": 3,
+    "store": {...},
+    "createdAt": "createAt",
+    "updatedAt": "updatedAt",
+    "winner": "user"
   }
 }
 ```
