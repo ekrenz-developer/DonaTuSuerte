@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { OrganizationService } from '../services/organization.service';
 
 @Component({
   selector: 'app-dashboard-org',
@@ -12,8 +13,11 @@ export class DashboardOrgComponent implements OnInit {
 
   user : any
   showOrganizations = true;
+  showStores = false;
 
-  constructor( private router : Router , private login : LoginService) { 
+  organizationSelected: any;
+
+  constructor( private router : Router , private login : LoginService , private orgService : OrganizationService) { 
     this.user = JSON.parse( localStorage.getItem ( 'user' ) ); 
     this.updateComponent()
   }
@@ -31,7 +35,12 @@ export class DashboardOrgComponent implements OnInit {
 
   loadStores( id )
   {
-    console.warn ('todo: loadStores()' + id)
-  }
+    console.warn ('get organization ' + id)
 
+    this.orgService.getOrganization( id ).then ( data => {
+      this.organizationSelected = data;
+      this.showOrganizations = false;
+      this.showStores = true;
+      console.log ( data )
+  })}
 }
