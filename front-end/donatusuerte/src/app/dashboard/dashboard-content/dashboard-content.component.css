@@ -1,0 +1,22 @@
+a{
+    cursor: pointer;
+  }
+
+  button{
+    width: 212px;
+  }
+
+  #formNewStore #collapseCreateDraw{
+    background-color: white;
+    padding: 2%;
+  }
+
+  .content {
+    margin-top: 58px;
+    margin-left: 250px;
+    background-color: darkgray;
+    padding: 20px;
+  }
+  .mi-cuenta-content{
+    margin-left: 250px;
+}

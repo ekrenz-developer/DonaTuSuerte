@@ -23,6 +23,9 @@ class AuthService {
           path: 'draws role organizations',
           populate: {
             path: 'status store raffles winner stores',
+            populate: {
+              path: 'draws'
+            }
           }
         })
 

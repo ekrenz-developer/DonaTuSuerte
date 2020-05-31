@@ -1,0 +1,55 @@
+/* body {
+
+} */
+.background {
+	background-image: url("/assets/images/1.jpg");
+	Width: auto;
+	margin-top: 50px;
+	height: 850px;
+	background-repeat: no-repeat;
+}
+.carousel-inner img {
+    width: 100%;
+    height:800px;
+ }
+
+.carrusel {
+	height: auto;
+
+}
+
+.ourcontribution {
+	margin-top:150px;
+}
+
+.nav-item {
+	content:right-side;
+}
+.who {
+    padding-top: 50px;
+    /* padding-bottom: 50px; */
+}
+#demo {
+	top:50px;
+
+}
+
+#whoweare {
+	height:500px;
+	padding-top:60px;
+	margin-bottom: 50px;
+	background-color:#0054ff85;
+}
+
+#whatdowedo {
+	margin-top:110px ;
+	padding-top: 80px;
+}
+
+#contribution {
+	height:250px;
+}
+.img-fluid {
+	max-width: 100%;
+	 height: auto;
+}

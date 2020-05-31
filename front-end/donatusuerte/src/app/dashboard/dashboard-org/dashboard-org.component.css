@@ -1,0 +1,19 @@
+a{
+  cursor: pointer;
+}
+
+button{
+  width: 212px;
+}
+
+#formNewStore #collapseCreateDraw{
+  background-color: white;
+  padding: 2%;
+}
+
+.content {
+
+  background-color: darkgray;
+  padding: 20px;
+  margin-top: 50px;
+}

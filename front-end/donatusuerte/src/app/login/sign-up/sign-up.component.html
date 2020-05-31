@@ -1,5 +1,5 @@
 <video autoplay muted loop id="myVideo">
-  <source src="assets/video/video1.mp4" type="video/mp4" >
+  <!-- <source src="assets/video/video1.mp4" type="video/mp4" > -->
 </video>
 
 <div *ngIf="showRoles" class="container" style="width: 50rem;">
@@ -10,79 +10,84 @@
 
 
 <div *ngIf="showSignUpForm" class="container">
+  <h1>Registro</h1><hr>
   <div class="row">
     <div class="col">
-<!-- USER PASSWORD  -->
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="inputEmail4">Email</label>
-        <input [(ngModel)]="user.email" type="email" class="form-control" >
-  </div>
 
-  <div class="form-group col-md-3">
-    <label for="inputPassword4">Password</label>
-      <input  [(ngModel)]="user.password" type="password" class="form-control">
-  </div>
+      <div class="form-group row">
+        <div class="form col-sm-6">
+          <label for="inputEmail4">Nombre</label>
+            <input  [(ngModel)]="user.firstName" name="first" class="form-control" >
+        </div>
+      <div class="form col-sm-6">
+        <label for="inputPassword4">Apellido</label>
+          <input [(ngModel)]="user.lastName" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="form col-sm-6">
+          <label for="inputEmail4">Email</label>
+            <input [(ngModel)]="user.email" type="email" class="form-control" >
+        </div>
+        <div class="form col-sm-6">
+          <label for="inputPassword4">Password</label>
+           <input  [(ngModel)]="user.password" type="password" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputAddress">Telefono</label>
+            <input  [(ngModel)]="user.phone" type="text" class="form-control">
+        </div>
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputAddress">Fecha de Nacimiento</label>
+            <input [(ngModel)]="user.dateOfBirth"  type="date" class="form-control" >
+        </div>
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputEmail4">Direccion</label>
+            <input  [(ngModel)]="user.address.street" type="address" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputPassword4">Localidad</label>
+            <input  [(ngModel)]="user.address.city" type="city" class="form-control">
+        </div>
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputPassword4">Estado/Pais</label>
+            <input  [(ngModel)]="user.address.state" type="contry" class="form-control">
+        </div>
+        <div class="form col-md-4 col-sm-6">
+          <label for="inputPassword4">Codigo Postal</label>
+            <input  [(ngModel)]="user.address.postalCode" type="text" class="form-control">
+        </div>
+    </div>
+
+<!-- <div class="form-group col-md-2">
+<label for="inputAddress">Pais</label>
+<input  [(ngModel)]="user.country"type="text" class="form-control">
 </div>
-
-<div class="form-row">
-  <div class="form-group col-md-3">
-    <label for="inputEmail4">Nombre</label>
-      <input  [(ngModel)]="user.firstName" name="first" class="form-control" >
-  </div>
-  <div class="form-group col-md-3">
-     <label for="inputPassword4">Apellido</label>
-       <input [(ngModel)]="user.lastName" type="text" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputAddress">Telefono</label>
-      <input  [(ngModel)]="user.phone" type="text" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputAddress">Fecha nacimiento</label>
-      <input [(ngModel)]="user.dateOfBirth"  type="date" class="form-control" >
-  </div>
-</div>
-
-
-
-<div class="form-row">
-  <div class="form-group col-md-2">
-    <label for="inputEmail4">Direccion</label>
-      <input  [(ngModel)]="user.address.street" type="address" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputPassword4">Localidad</label>
-      <input  [(ngModel)]="user.address.city" type="city" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputPassword4">Estado/Pais</label>
-      <input  [(ngModel)]="user.address.state" type="contry" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputPassword4">Codigo Postal</label>
-      <input  [(ngModel)]="user.address.postalCode" type="text" class="form-control">
-  </div>
-  <div class="form-group col-md-2">
-    <label for="inputAddress">Pais</label>
-      <input  [(ngModel)]="user.country"type="text" class="form-control">
-  </div>
-</div>
+</div> -->
 
 <div class="form-group">
-  <label for="inputAddress">Foto  ></label>
-    <input type="file"  class = "btn btn-success" (change)="onFileSelected($event)" >
+  <div class="form">
+    <label for="inputAddress">Foto  ></label>
+      <input type="file"  class="btn btn-primary col" (change)="onFileSelected($event)" >
+  </div>
+
+  <div class="form">
+    <label for="inputAddress">Condiciones</label>
+      <input [(ngModel)]="user.conditions"  type="Checkbox" class="form-control" >
+  </div>
 </div>
-
-
-
-<div class="form-group col-md-2">
-  <label for="inputAddress">Condiciones</label>
-    <input [(ngModel)]="user.conditions"  type="Checkbox" class="form-control" >
-</div>
-
 
 <button class="btn btn-primary" (click)="signUp()">Registrarse</button>
-<button class="btn btn-info" (click)="changeUser()" >Cambiar Usuario</button>
+<button class="btn btn-primary" (click)="changeUser()" >Cambiar Usuario</button>
 </div>
+</div>
+</div>
+
 

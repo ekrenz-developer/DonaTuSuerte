@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 import error from '../helpers/error'
 
 class Service {
@@ -73,6 +75,10 @@ class Service {
 
   async update(id, data) {
     try {
+      if (!Types.ObjectId.isValid(id)) {
+        throw new error.ErrorHandler('Invalid id', 400);
+      }
+
       let item = await this.model.findByIdAndUpdate(id, data, { new: true });
       return {
         error: false,
@@ -86,19 +92,15 @@ class Service {
 
   async delete(id) {
     try {
+      if (!Types.ObjectId.isValid(id)) {
+        throw new error.ErrorHandler('Invalid id', 400);
+      }
+
       let item = await this.model.findByIdAndDelete(id);
       if (!item) {
         throw new error.ErrorHandler('item not found', 404);
       }
-      /*
-      if (item.path) {
-        fs.unlink(item.path, function(err) {
-          if (err) {
-            throw err;
-          }
-        });
-      }
-      */
+
       return {
         error: false,
         deleted: true,
