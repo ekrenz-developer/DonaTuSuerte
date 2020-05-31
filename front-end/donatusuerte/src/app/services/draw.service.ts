@@ -23,4 +23,38 @@ export class DrawService {
         }).then( data => { window.location.reload() })
       });
   }
+
+
+  updateDraw ( body )
+  {
+    let uri = '/draws/' + body._id
+
+    this.request.put ( uri , body).then( data => 
+      {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sorteo actualizado correctamente',
+          showConfirmButton: false,
+          timer: 3000
+        }).then( data => { window.location.reload() })
+      })
+  }
+
+  deleteDraw( storeId , drawId )
+  {
+    let uri = '/stores/'+ storeId +'/draws/' + drawId;
+
+    return this.request.delete ( uri  ).then ( data => 
+      {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sorteo eliminado con éxito',
+          text : 'Se reflejará en tu lista de sorteos',
+          showConfirmButton: false,
+          timer: 1500
+        }).then ( data => {
+          window.location.reload()
+        })
+       })
+  }
 }

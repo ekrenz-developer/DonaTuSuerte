@@ -5,6 +5,7 @@ import { OrganizationService } from '../../services/organization.service';
 import Swal from 'sweetalert2';
 import { StoreService } from '../../services/store.service';
 import { DrawService } from 'src/app/services/draw.service';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-dashboard-org',
@@ -69,7 +70,7 @@ export class DashboardOrgComponent implements OnInit {
       this.storeSelected = response.data;
       this.showDraws = true;
       this.showStores = false;
-      console.log ( this.storeSelected )
+      console.log(this.storeSelected)
     })
   }
 
@@ -169,11 +170,53 @@ export class DashboardOrgComponent implements OnInit {
 
   }
 
-  updateDraw() {
-    this.orgService.updateOrganization(this.organizationSelected);
+
+
+
+
+
+  onFileSelected(event) {
+    this.formData.append('photo', event.target.files[0])
+    console.log(event.target.files[0])
   }
 
 
+  drawSelected: any;
+  showDraw = false;
+
+  loadDraw(idDraw) {
+    this.storeSelected.draws.forEach(draw => {
+      if (draw._id = idDraw) {
+        this.drawSelected = draw;
+        this.showDraws = false;
+        this.showDraw = true;
+        console.log ( draw )
+      }
+    });
+  }
+
+  goBackDraws()
+  {
+    this.showDraw = false;
+    this.showDraws = true;
+  }
+
+
+  updateDraw()
+  {
+    let body = 
+    {
+      "_id": this.drawSelected._id,
+      "description": this.drawSelected.description,
+      "startDate": this.drawSelected.startDate,
+      "endDate": this.drawSelected.endDate,
+    }
+
+    this.drawService.updateDraw( body )
+
+  }
+
+  
   deleteDraw() {
     Swal.fire({
       title: '¿Seguro que quiere proceder?',
@@ -186,22 +229,9 @@ export class DashboardOrgComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        this.storeService.deleteStore(this.storeSelected._id, this.organizationSelected._id)
+        this.drawService.deleteDraw(this.storeSelected._id, this.drawSelected._id)
       }
     })
-  }
-
-
-  onFileSelected(event) {
-    this.formData.append('photo', event.target.files[0])
-    console.log(event.target.files[0])
-  }
-
-
-
-  loadDraw ( idDraw )
-  {
-    console.log ( idDraw )
   }
 
 }
