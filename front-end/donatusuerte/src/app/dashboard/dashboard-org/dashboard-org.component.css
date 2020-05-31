@@ -1,15 +1,18 @@
 a{
   cursor: pointer;
   margin-bottom: 20px;
+  background-color:#023669 ;
 }
-
+a:hover {
+  background-color: rgb(26, 30, 65);
+}
 button{
   width: 212px;
   margin: 1px;
 }
 
 #formNewStore #collapseCreateDraw{
-  background-color: white;
+  /* background-color: white; */
   padding: 2%;
 }
 
@@ -28,6 +31,7 @@ button{
 .container {
   background-color: rgba(0, 0, 0, 0.384);
   color: white;
+  padding: 20px;
 }
 .h3 {
   color: white;
