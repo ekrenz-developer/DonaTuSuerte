@@ -1,5 +1,6 @@
 .container {
-    position: relative;
+
+  position: relative;
     /* justify-content: center; */
     bottom: 0;
     background: rgba(1, 47, 133, 0.466);
@@ -29,4 +30,7 @@ li:hover{
 }
 .btn-info {
   margin-left:15px;
+}
+.btn {
+  width: 500px;
 }
