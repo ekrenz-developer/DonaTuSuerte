@@ -1,22 +1,24 @@
+
+
 .container {
-    position: relative;
-    /* justify-content: center; */
-    bottom: 0;
-    background: rgba(1, 47, 133, 0.466);
-    color: #ffffff;
-    width: 100%;
-    padding: 20px;
-    margin-top: 70px;
+  position: relative;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.26);
+  color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  margin-top: 150px;
   }
 
   #myVideo {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-    }
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url("/assets/images/blur1.jpg");
 
+    }
 
 li{
   color:black;
@@ -29,4 +31,8 @@ li:hover{
 }
 .btn-info {
   margin-left:15px;
+}
+.btn {
+  width: 400px;
+  margin: 10px;
 }

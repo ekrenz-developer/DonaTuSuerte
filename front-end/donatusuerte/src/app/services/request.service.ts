@@ -6,10 +6,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class RequestService {
 
-  // server connection url 
-  private url: String = "https://api-dona-tu-suerte.herokuapp.com/api/v1";
+  // server connection url
+  private url: String = "http://localhost:4500/api/v1";
 
-  // headers to connect server 
+  // headers to connect server
   private getHeaders() {
     if (localStorage.getItem('token')) {
       return new HttpHeaders({
@@ -22,7 +22,7 @@ export class RequestService {
   constructor(private http: HttpClient) { }
 
   post(uri,body) {
- 
+
     let header: HttpHeaders = this.getHeaders()
     console.log ( this.url + uri )
     if (header != null) {
@@ -41,6 +41,30 @@ export class RequestService {
     let url = this.url + uri;
 
     return this.http.get( url ,  {headers : this.getHeaders() } ).toPromise().then ( data => { return data; })
-  } 
+  }
+
+  delete ( uri  )
+  {
+    return this.http.delete ( this.url + uri ,  { headers: this.getHeaders()}  ).toPromise()
+    .then( data => {
+      console.log ( data );
+      return data;
+    })
+    .catch ( err => {
+      console.error ( err );
+    })
+  }
+
+  put ( uri , body  )
+  {
+    return this.http.put ( this.url + uri , body,  { headers: this.getHeaders ()}  ).toPromise()
+      .then( data => {
+        console.log ( data );
+        return data;
+      })
+      .catch ( err => {
+        console.error ( err );
+      })
+  }
 
 }

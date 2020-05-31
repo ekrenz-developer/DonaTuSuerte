@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 import { RequestService } from './request.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -67,6 +66,7 @@ export class LoginService {
           showConfirmButton: false,
           timer: 1500
         })
+        this.router.navigate ( ['/dashboard'])
       })
       .catch(err => {
         console.log(err)
@@ -86,6 +86,20 @@ export class LoginService {
   {
     let uri = '/roles';
     return this.request.get ( uri ).then( data => { return data} )
+  }
+
+
+  
+  getUser ()
+  {
+    let uri = '/users'
+
+    return this.request.get( uri ).then ( data => { 
+      let response:any = data;
+      localStorage.setItem('user', JSON.stringify( response.data ));
+      console.log ( response.data )
+      return response; 
+    }) 
   }
 
 }

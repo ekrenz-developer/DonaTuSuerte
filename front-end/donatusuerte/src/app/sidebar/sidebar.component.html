@@ -1,0 +1,28 @@
+<nav id="sidebar" class="sidebar-{{user.role.role}}" style="margin-top: 50px;">
+  <div class="sidebar-header">
+
+      <div style="text-align: center;">
+            <img class="card-img-top rounded-circle" src="{{user.photo}}" alt="Card image"><hr>
+            <h5>{{user.firstName}} {{user.lastName}}</h5>
+      </div>
+
+  </div>
+
+  <ul class="list-unstyled components">
+      <p>{{user.role.description}}</p>
+
+      <li>
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <app-sidebar-competitor *ngIf="user.role.role == 2"> </app-sidebar-competitor>
+          <app-sidebar-organization *ngIf="user.role.role == 3"> </app-sidebar-organization>
+          <app-sidebar-checker *ngIf="user.role.role == 4"> </app-sidebar-checker>
+        </div>
+      </li>
+  </ul>
+  <ul class="list-unstyled components">
+       <li>
+          <a class="btn btn-danger" (click)="closeSesion()">Cerrar Sesion</a>
+       </li>
+  </ul>
+
+</nav>
