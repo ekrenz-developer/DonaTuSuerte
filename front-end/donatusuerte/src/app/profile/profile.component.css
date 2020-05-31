@@ -1,14 +1,23 @@
-/* .card {
-  width: 200px;
-} */
 .container {
   margin-top: 70px;
   padding: 50px;
+  color: black;
+  background-image: url("/assets/images/blur1.jpg");
+}
+.ul {
+  background-color: blue;
 }
 .rounded-circle {
   width: 250px;
   height:250px;
 }
 .list-group {
-  margin-left: 350px;
+  margin-left: 50px;
 }
+.content {
+
+ background-image: url("/assets/images/blur1.jpg");
+ height: 1080px;
+ color: white;
+}
+

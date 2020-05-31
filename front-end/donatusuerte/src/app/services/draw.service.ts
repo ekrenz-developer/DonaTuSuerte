@@ -9,6 +9,16 @@ export class DrawService {
 
   constructor( private request : RequestService ) { }
 
+
+  getDraws()
+  {
+    console.log ( "asd")
+    return this.request.get ( '/draws' ).then( data => {
+      let response: any = data;
+       return response.data;
+    })
+  }
+  
   createDraw ( body , storeId )
   {
     let uri = '/stores/' + storeId + '/draws'
@@ -56,5 +66,41 @@ export class DrawService {
           window.location.reload()
         })
        })
+  }
+
+  
+  enterDraw ( value , drawId)
+  {
+    let uri = '/draws/' + drawId + '/enter'
+    let body = {
+      "countRaffles": parseInt(value)
+    }
+    console.log ( body )
+    return this.request.post (uri,body).then (data => {return data})
+  }
+
+
+  executeDraw ( drawId )
+  {
+    let uri = '/draws/' + drawId +  '/run'
+    this.request.post ( uri  , null).then ( data => 
+      {
+        let response : any = data; 
+        console.log ( data )
+        this.request.getUser( '/users/' , response.data.winner ).then ( data => {
+          let res : any = data ; 
+          res = res.data ; 
+            Swal.fire({
+              icon: 'success',
+              title: 'Sorteo realizado con exíto',
+              text : 'Ganador : ' + res.email,
+              showConfirmButton: true,
+              timer: 3500
+            }).then ( data => {
+              window.location.reload()
+            })
+        })
+        
+      })
   }
 }

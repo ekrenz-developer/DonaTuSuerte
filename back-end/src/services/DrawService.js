@@ -11,7 +11,10 @@ import uploadClodinary from '../utils/uploadCloudinary';
 import config from '../config/index';
 
 const populate = {
-  path: 'status store raffles winner'
+  path: 'status store raffles winner',
+  populate: {
+    path: 'draws'
+  }
 }
 
 const belongsUser = async(idStore, Model ,idUser, getOrgId = false) => {
@@ -178,21 +181,24 @@ class DrawService extends Service {
 
   async enter(idUser, idDraw, countRaffles) {
     try {
+      if (!countRaffles) {
+        throw new error.ErrorHandler('Count of raffles not defined', 400);
+      }
       //asigno al usuario la cantidad de rifas correspondientes
       let index = 0;
       while (index < countRaffles) {
         let raffle = await this.Raffle.create({ user: idUser });
-        
+
         const newRaffle = { $push: { 'raffles': raffle._id } };
         let createdRaffle = await this.model.findByIdAndUpdate(idDraw, newRaffle, { new: true, upsert: true });
-
+      
         index ++;
       }
-
+      
       //agrego el sorteo a la lista de sorteos del usuario
       let draw = await this.User.findOne({ _id: idUser, draws: Types.ObjectId(idDraw) });
 
-      if (!draw) {
+      if (!draw || draw === null) {
         const newDraw = { $push: { 'draws': idDraw } }
         await this.User.findByIdAndUpdate(idUser, newDraw, { new: true, upsert: true });
       }
@@ -213,13 +219,56 @@ class DrawService extends Service {
         data: user
       };
     } catch (err) {
-      console.log(err)
-      return {
-        error: true,
-        statusCode: 500,
-        message: err
-      };
+      throw err
     }
+  }
+
+  async run(idDraw) {
+    try {
+      //  Esta logica es provisoria para la demo, la idea es correr un batch que ejecute los sorteos todos los dias a cierta hora
+
+      if (!Types.ObjectId.isValid(idDraw)) {
+        throw new error.ErrorHandler('Invalid id', 400);
+      }
+
+      let statusFinal = await this.Status.findOne({ status: 5 });
+      if (!statusFinal) {
+        throw new error.ErrorHandler('Status collection not defined')
+      }
+
+      let draw = await this.model
+        .findById(idDraw)
+        .populate(populate)
+
+      if (!draw) {
+        throw new error.ErrorHandler('Draw not found', 400);
+      }
+
+      let min = 0,
+          max = draw.raffles.length;
+
+      let index = min + Math.floor((max - min) * Math.random());
+
+      let winner = draw.raffles[index].user;
+      
+      const newDraw = {
+        winner: Types.ObjectId(winner),
+        status: statusFinal._id
+      };
+      
+      let updatedDraw = await this.model
+        .findByIdAndUpdate(idDraw, newDraw, { new: true, upsert: true })
+        //.populate(populate);
+
+      return {
+        error: false,
+        statusCode: 202,
+        data: updatedDraw
+      };      
+    } catch (err) {
+      throw err
+    }
+
   }
 };
 

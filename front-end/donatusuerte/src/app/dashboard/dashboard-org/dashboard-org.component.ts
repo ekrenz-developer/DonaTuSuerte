@@ -234,4 +234,23 @@ export class DashboardOrgComponent implements OnInit {
     })
   }
 
+
+  executeDraw()
+  {
+    Swal.fire({
+      title: 'Esta por sortear este premio ! ',
+      text: "Se buscará al ganador del premio entre las rifas sorteadas",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'SORTEAR ! ',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.drawService.executeDraw( this.drawSelected._id )
+      }
+    })
+  }
+
 }

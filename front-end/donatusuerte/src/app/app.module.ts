@@ -20,6 +20,9 @@ import { SidebarOrganizationComponent } from './sidebar/sidebar-organization/sid
 import { SidebarCompetitorComponent } from './sidebar/sidebar-competitor/sidebar-competitor.component';
 import { SidebarCheckerComponent } from './sidebar/sidebar-checker/sidebar-checker.component';
 import { NavbarLightComponent } from './navbar-light/navbar-light.component';
+import { DashboardCompetitorComponent } from './dashboard/dashboard-competitor/dashboard-competitor.component';
+import { DrawComponent } from './draws/draw/draw.component';
+import { DrawListComponent } from './draws/draw-list/draw-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,10 @@ import { NavbarLightComponent } from './navbar-light/navbar-light.component';
     SidebarOrganizationComponent,
     SidebarCompetitorComponent,
     SidebarCheckerComponent,
-    NavbarLightComponent
+    NavbarLightComponent,
+    DashboardCompetitorComponent,
+    DrawComponent,
+    DrawListComponent
   ],
   imports: [
     BrowserModule,

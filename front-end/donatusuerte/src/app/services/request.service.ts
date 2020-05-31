@@ -43,6 +43,14 @@ export class RequestService {
     return this.http.get( url ,  {headers : this.getHeaders() } ).toPromise().then ( data => { return data; })
   }
 
+  getUser ( uri , body )
+  {
+    let url = this.url + uri + body;
+console.log ( url ) ; 
+    return this.http.get( url , {headers : this.getHeaders() } ).toPromise().then ( data => { return data; })
+  }
+
+
   delete ( uri  )
   {
     return this.http.delete ( this.url + uri ,  { headers: this.getHeaders()}  ).toPromise()

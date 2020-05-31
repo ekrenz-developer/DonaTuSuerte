@@ -7,6 +7,11 @@ const userRouter = server => {
     middlewares.Auth.isAuth,
     UserController.getUser
   );
+  server.get(
+    '/api/v1/users/:_id',
+    middlewares.Auth.isAuth,
+    UserController.get
+  );
   server.post(
     '/api/v1/users/sign-in',
     UserController.signIn
