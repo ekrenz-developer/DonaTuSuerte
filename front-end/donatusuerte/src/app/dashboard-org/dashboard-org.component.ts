@@ -43,4 +43,9 @@ export class DashboardOrgComponent implements OnInit {
       this.showStores = true;
       console.log ( data )
   })}
+
+  loadDraws ( id ) 
+  {
+    alert ( "TODO : loadDraw() ")
+  }
 }
