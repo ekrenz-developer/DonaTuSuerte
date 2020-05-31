@@ -35,6 +35,12 @@ https://api-dona-tu-suerte.herokuapp.com
 | [Create a store](#Create-a-store) | POST | /api/v1/organizations/{id}/stores |
 | [Update a store](#Update-a-store) | PUT | /api/v1/stores/{id} |
 | [Delete a store](#Delete-a-store) | DELETE | /api/v1/organizations/{id}/stores/{id} |
+| [Get draws](#Get-draws) | GET | /api/v1/draws |
+| [Get a draw](#Get-a-draw) | GET | /api/v1/draws/{id} |
+| [Create a draw](#Create-a-draw) | POST | /api/v1/stores/{id}/draws/{id} |
+| [Update a draw](#Update-a-draw) | PUT | /api/v1/draws/{id} |
+| [Delete a draw](#Delete-a-draw) | DELETE | /api/v1/stores/{id}/draws/{id} |
+| [Enter a draw](#Enter-a-draw) | POST | /api/v1/draws/{id} |
 
 ## Get roles
 
@@ -647,6 +653,283 @@ header: {
       "lon": "lon"
     },
     "draws": [...]
+  }
+}
+```
+
+## Get draws
+
+### Request
+
+`
+GET /api/v1/draws
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+}
+```
+
+### Response
+
+```
+{
+  "_id": "id",
+  "description": "description",
+  "photo": "",
+  "raffles": [],
+  "prize": 1000,
+  "store": {...},
+  "status": {...},
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+  "score": 50000,
+  "winner": {...}
+  "scoreRaffle": 250,
+  "reqRaffles": 200,
+  "createdAt": "2020-05-29T22:49:53.030Z",
+  "updatedAt": "2020-05-29T22:49:53.030Z"
+}
+```
+
+## Get a draw
+
+### Request
+
+`
+GET /api/v1/draws/{id}
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+}
+```
+
+### Response
+
+```
+{
+  "_id": "id",
+  "description": "description",
+  "photo": "",
+  "raffles": [],
+  "prize": 1000,
+  "store": {...},
+  "status": {...},
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+  "score": 50000,
+  "winner": {...}
+  "scoreRaffle": 250,
+  "reqRaffles": 200,
+  "createdAt": "2020-05-29T22:49:53.030Z",
+  "updatedAt": "2020-05-29T22:49:53.030Z"
+}
+```
+
+## Create a draw
+
+### Request
+
+`
+POST /api/v1/stores/{id}/draws
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+},
+body: {
+  "description": "description",
+  "prize": 1000,
+  "photo": "photo.jpg"
+}
+```
+
+### Response
+
+```
+{
+  "_id": "id",
+  "description": "description",
+  "photo": "",
+  "raffles": [],
+  "prize": 1000,
+  "store": {...},
+  "status": {...},
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+  "score": 50000,
+  "winner": {...}
+  "scoreRaffle": 250,
+  "reqRaffles": 200,
+  "createdAt": "2020-05-29T22:49:53.030Z",
+  "updatedAt": "2020-05-29T22:49:53.030Z"
+}
+```
+
+## Update a draw
+
+### Request
+
+`
+PUT /api/v1/draws/{id}
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+},
+body: {
+  "_id": "id",
+  "description": "description",
+  "photo": "photo.jpg",
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+}
+```
+
+### Response
+
+```
+{
+  "_id": "id",
+  "description": "description",
+  "photo": "",
+  "raffles": [],
+  "prize": 1000,
+  "store": {...},
+  "status": {...},
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+  "score": 50000,
+  "winner": {...}
+  "scoreRaffle": 250,
+  "reqRaffles": 200,
+  "createdAt": "2020-05-29T22:49:53.030Z",
+  "updatedAt": "2020-05-29T22:49:53.030Z"
+}
+```
+
+## Delete a draw
+
+### Request
+
+`
+DELETE /api/v1/organizations/{id}/draws/{id}
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+}
+```
+
+### Response
+
+```
+{
+  "_id": "id",
+  "description": "description",
+  "photo": "",
+  "raffles": [],
+  "prize": 1000,
+  "store": {...},
+  "status": {...},
+  "startDate": "2020-05-01",
+  "endDate": "2020-05-20",
+  "score": 50000,
+  "winner": {...}
+  "scoreRaffle": 250,
+  "reqRaffles": 200,
+  "createdAt": "2020-05-29T22:49:53.030Z",
+  "updatedAt": "2020-05-29T22:49:53.030Z"
+}
+```
+
+## Enter a draw
+
+### Request
+
+`
+POST /api/v1/draws/{id}/enter
+`
+
+```
+header: {
+  "Authorization": "Bearer " <TOKEN>
+},
+body: {
+  "countRaffles": 1
+}
+```
+
+### Response
+
+```
+{
+  "error": false,
+  "statusCode": 200,
+  "data": {
+    "_id": "id",
+    "email": "mail@test.com",
+    "password": "yourPass",
+    "photo": "photo.jpg",
+    "firstName": "prueba",
+    "lastName": "prueba",
+    "dateOfBirth": "2000-01-01",
+    "country": String,
+    "address": {
+      "street": "street",
+      "city": "city",
+      "state": "state",
+      "postalCode": "postalCode",
+      "country": "country",
+      "lat": "lat",
+      "lon": "lon"
+    },
+    "phone": "1111111111",
+    "conditions": true,
+    "score": 1,
+    "role": {
+      "_id": "id",
+      "description": "role"
+    },
+    "verified": true,
+    "draws": [
+      {
+        "photo": "",
+        "raffles": [...],
+        "_id": "id",
+        "description": "Sorteo 1",
+        "prize": 1000,
+        "starDate": "2020-05-20T00:00:00.000Z",
+        "endDate": "2020-06-20T23:59:59.000Z",
+        "score": 50000,
+        "status": {
+          "_id": "id",
+          "description": "description"
+        },
+        "store": {
+          "_id": "id",
+          "name": "sexe",
+          "address": {
+            "street": "22 Rue du Grenier Saint-Lazare",
+            "city": "Paris",
+            "state": "",
+            "postalCode": "75003",
+            "country": "France",
+            "lat": "",
+            "lon": ""
+          }
+        },
+        "updatedAt": "2020-05-22T00:05:46.250Z",
+        "scoreRaffle ": 250,
+        "reqRaffles": 200
+      }
+    ]
   }
 }
 ```

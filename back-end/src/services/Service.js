@@ -92,6 +92,10 @@ class Service {
 
   async delete(id) {
     try {
+      if (!Types.ObjectId.isValid(id)) {
+        throw new error.ErrorHandler('Invalid id', 400);
+      }
+
       let item = await this.model.findByIdAndDelete(id);
       if (!item) {
         throw new error.ErrorHandler('item not found', 404);

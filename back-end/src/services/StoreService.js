@@ -111,7 +111,7 @@ class StoreService extends Service {
       //  Si la sucursal tiene un sorteo vigente no se puede eliminar
       let store = this.model.findById(id);
       if (store.draws) {
-        store.draws.forEach(store => {
+        store.draws.forEach(draw => {
           if (draw.status === 3) {
             throw new error.ErrorHandler('The store has a valid drawing', 403);
           }
