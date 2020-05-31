@@ -245,7 +245,7 @@ class DrawService extends Service {
       }
 
       let min = 0,
-          max = draw.reqRaffles;
+          max = draw.raffles.length;
 
       let index = min + Math.floor((max - min) * Math.random());
 
