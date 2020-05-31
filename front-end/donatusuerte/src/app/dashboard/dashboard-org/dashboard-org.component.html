@@ -1,6 +1,6 @@
 <div class="content">
   <div class="list-group">
-    <div *ngIf="showOrganizations">
+    <div *ngIf="showOrganizations" class="container">
       <h3>Organizaciones</h3>
       <hr>
       <a *ngFor="let organization of user.organizations"
@@ -13,32 +13,36 @@
         <p class="mb-1">CUIT : {{organization.cuit}}</p>
       </a>
 
-      <div><hr>
-        <button type="button" class="btn btn-primary" (click)="newStore()" data-toggle="collapse" href="#collapseExample" aria-controls="collapseExample">Crear organizacion</button>
-  
+      <div>
+        <hr>
+        <button type="button" class="btn btn-primary" (click)="newStore()" data-toggle="collapse"
+          href="#collapseExample" aria-controls="collapseExample">Crear organizacion</button>
+
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
-    
-              <div class="form-group">
-                <label for="exampleInputEmail1" >CUIT</label>
-                <input [(ngModel)]="organization.cuit" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="true">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Nombre de Organizacion</label>
-                <input [(ngModel)]="organization.name" type="text" class="form-control" id="exampleInputPassword1" required="true">
-              </div>
-              <button class="btn btn-primary" type="submit" (click)="registerOrganization()">Registrarme</button>
-    
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">CUIT</label>
+              <input [(ngModel)]="organization.cuit" type="number" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" required="true">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Nombre de Organizacion</label>
+              <input [(ngModel)]="organization.name" type="text" class="form-control" id="exampleInputPassword1"
+                required="true">
+            </div>
+            <button class="btn btn-primary" type="submit" (click)="registerOrganization()">Registrarme</button>
+
           </div>
         </div>
 
-    </div>
-    
-      
+      </div>
+
+
     </div>
   </div>
 
-  <div *ngIf="showStores" id="stores" class="list-group">
+  <div *ngIf="showStores" id="stores" class="list-group container">
     <h2>Organizacion {{organizationSelected.name}}</h2>
     <h6>Cuit {{organizationSelected.cuit}}</h6>
     <br>
@@ -113,7 +117,7 @@
   </div>
 </div>
 
-<div *ngIf="showDraws" id="stores" class="list-group">
+<div *ngIf="showDraws" id="stores" class="list-group container">
   <h2>Sucursal: {{storeSelected.name}}</h2>
   <strong> Organizacion : {{organizationSelected.name}}</strong>
   <hr>
@@ -125,12 +129,24 @@
 
   <br>
 
+  <h3>Sorteos</h3>
+
+  <ul class="list-group" *ngFor="let draw of storeSelected.draws">
+    
+    <a (click)="loadDraw( draw._id )" class="btn list-group-item d-flex justify-content-between align-items-center ">
+      <img src="{{draw.photo}}" alt="" style="width: 40px;">
+      {{draw.description}}
+      <span class="badge badge-primary badge-pill">Premio : ${{draw.prize}}</span>
+    </a>
+  </ul>
+
+
   <div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-warning" data-toggle="collapse" href="#collapseUpdateStore"
       aria-controls="collapseUpdateStore"> / Editar Sucursal</button>
     <button type="button" class="btn btn-danger" (click)="deleteStore()"> X Eliminar Sucursal</button>
     <button type="button" class="btn btn-primary" data-toggle="collapse" href="#collapseCreateDraw"
-      aria-controls="collapseCreateDraw" > + Crear Sorteo </button>
+      aria-controls="collapseCreateDraw"> + Crear Sorteo </button>
     <button type="button" class="btn btn-info" (click)="goBackStores()">
       << Volver</button>
   </div>
@@ -182,6 +198,55 @@
     </div>
 
     <button type="submit" class="btn btn-primary" (click)="addDraw()">Cargar sorteo nuevo</button>
+
+  </div>
+
+</div>
+
+
+
+<div *ngIf="showDraw" id="stores" class="container">
+  <h2>Sorteo: {{drawSelected.description}}</h2>
+  <strong> Estado : {{drawSelected.status.description}}</strong>
+  <hr>
+  <img src="{{drawSelected.photo}}" alt="" style="width: 270px;">
+  <hr>
+  <h6>Puntos: {{drawSelected.score}}</h6>
+  <h6>Punto requeridos por rifa : {{drawSelected.scoreRaffle}}</h6>
+  <h6>Rifas totales: {{drawSelected.reqRaffles}}</h6>
+  <h6>Rifas restantes: {{drawSelected.reqRaffles - drawSelected.raffles.length}}</h6>
+  <h6>Creado el : {{drawSelected.createdAt}}</h6>
+  <h6>Actualizado el : {{drawSelected.updatedAt}}</h6>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-warning" data-toggle="collapse" href="#collapseUpdateDraw"
+      aria-controls="collapseUpdateDraw"> / Editar Sorteo</button>
+    <button type="button" class="btn btn-danger" (click)="deleteDraw()"> X Eliminar Sorteo</button>
+    <button type="button" class="btn btn-info" (click)="goBackDraws()">  << Volver</button>
+  </div>
+
+  <div class="collapse card card-body" id="collapseUpdateDraw">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Titulo del sorteo</label>
+        <input [(ngModel)]="drawSelected.description" type="name" class="form-control" id="inputEmail4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Premio ( en $ pesos )</label>
+        <input [(ngModel)]="drawSelected.prize" type="number" class="form-control" id="inputPassword4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Fecha inicio</label>
+        <input [(ngModel)]="drawSelected.startDate" type="date" class="form-control" id="inputPassword4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Fecha de finalizacion</label>
+        <input [(ngModel)]="drawSelected.endDate" type="date" class="form-control" id="inputPassword4">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-warning" (click)="updateDraw()"> / Editar</button>
 
   </div>
 

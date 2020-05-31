@@ -25,6 +25,16 @@ export class StoreService {
         })
       })
   }
+
+  getStore ( id )
+  {
+    let uri = '/stores/' + id;
+
+    return this.request.get( uri ).then ( data => 
+      {
+        return data;
+      })
+  }
   
   deleteStore( storeId , orgId )
   {
