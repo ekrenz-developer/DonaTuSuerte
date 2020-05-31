@@ -183,7 +183,7 @@ export class DashboardOrgComponent implements OnInit {
 
   updateStore()
   {
-    this.request.updateStore( this.storeSelected )
+    this.storeService.updateStore( this.storeSelected )
     .then ( data => {
        
       Swal.fire({
@@ -194,6 +194,6 @@ export class DashboardOrgComponent implements OnInit {
       })
     });
   }
-  
+
 
 }
