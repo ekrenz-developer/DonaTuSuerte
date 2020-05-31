@@ -248,16 +248,7 @@ export class DashboardOrgComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        // this.drawService.executeDraw( this.drawSelected._id )
-        Swal.fire({
-          icon: 'success',
-          title: 'Sorteado realizado con exíto',
-          text : '',
-          showConfirmButton: false,
-          timer: 1500
-        }).then ( data => {
-          window.location.reload()
-        })
+        this.drawService.executeDraw( this.drawSelected._id )
       }
     })
   }

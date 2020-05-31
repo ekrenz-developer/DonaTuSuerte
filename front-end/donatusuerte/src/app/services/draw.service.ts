@@ -87,7 +87,7 @@ export class DrawService {
       {
         Swal.fire({
           icon: 'success',
-          title: 'Sorteado realizado con exíto',
+          title: 'Sorteo realizado con exíto',
           text : '',
           showConfirmButton: false,
           timer: 1500
