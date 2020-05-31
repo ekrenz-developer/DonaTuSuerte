@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 import { RequestService } from './request.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -67,7 +66,7 @@ export class LoginService {
           showConfirmButton: false,
           timer: 1500
         })
-        this.router.navigate ( ['/dashboard-organization'])
+        this.router.navigate ( ['/dashboard'])
       })
       .catch(err => {
         console.log(err)

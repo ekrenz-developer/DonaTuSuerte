@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
-import { OrganizationService } from '../services/organization.service';
+import { LoginService } from '../../services/login.service';
+import { OrganizationService } from '../../services/organization.service';
 import Swal from 'sweetalert2';
-import { StoreService } from '../services/store.service';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-dashboard-org',

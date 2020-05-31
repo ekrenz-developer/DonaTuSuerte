@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class RequestService {
 
   // server connection url
-  private url: String = "http://localhost:3000/api/v1";
+  private url: String = "http://localhost:4500/api/v1";
 
   // headers to connect server
   private getHeaders() {
