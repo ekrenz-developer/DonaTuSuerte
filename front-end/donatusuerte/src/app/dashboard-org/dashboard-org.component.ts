@@ -60,8 +60,7 @@ export class DashboardOrgComponent implements OnInit {
   }
 
 
-  deleteOrganization()
-  {
+  deleteOrganization() {
     Swal.fire({
       title: '¿Seguro que quiere proceder?',
       text: "Se eliminará las sucursales y todos los sorteos incluidos",
@@ -73,18 +72,18 @@ export class DashboardOrgComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.orgService.deleteOrganization ( this.organizationSelected._id )
-        .then ( data => {
-          Swal.fire(
-            'Organizacion eliminada con éxito',
-            'Se reflejará en tu lista de organizaciones',
-            'success'
-          )
-        })
-        
+        this.orgService.deleteOrganization(this.organizationSelected._id)
+          .then(data => {
+            Swal.fire(
+              'Organizacion eliminada con éxito',
+              'Se reflejará en tu lista de organizaciones',
+              'success'
+            )
+          })
+
       }
     })
   }
 
-  
+
 }
