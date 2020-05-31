@@ -55,4 +55,16 @@ export class RequestService {
     }) 
   }
 
+  put ( uri , body  )
+  {
+    return this.http.put ( this.url + uri , body,  { headers: this.getHeaders ()}  ).toPromise()
+      .then( data => {
+        console.log ( data );
+        return data;
+      })
+      .catch ( err => {
+        console.error ( err );
+      }) 
+  }
+
 }

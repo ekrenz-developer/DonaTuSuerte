@@ -24,4 +24,16 @@ export class OrganizationService {
 
     return this.request.delete ( uri  ).then ( data => {return data })
   }
+
+  updateOrganization( organization )
+  {
+    let uri = '/organizations/' + organization._id;
+
+    let body =  {
+      "cuit": organization.cuit ,
+      "name": organization.name
+    } 
+
+    return this.request.put ( uri , body  )
+  }
 }

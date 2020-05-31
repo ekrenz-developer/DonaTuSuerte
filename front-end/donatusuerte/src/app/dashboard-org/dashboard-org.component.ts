@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { OrganizationService } from '../services/organization.service';
 import Swal from 'sweetalert2';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-dashboard-org',
@@ -21,7 +22,12 @@ export class DashboardOrgComponent implements OnInit {
   organizationSelected: any;
   storeSelected: any;
 
-  constructor(private router: Router, private login: LoginService, private orgService: OrganizationService) {
+  constructor(
+    private router: Router, 
+    private login: LoginService, 
+    private orgService: OrganizationService, 
+    private storeService : StoreService) 
+    {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.updateComponent()
   }
@@ -85,5 +91,51 @@ export class DashboardOrgComponent implements OnInit {
     })
   }
 
+  updateOrganization(){
+    this.orgService.updateOrganization( this.organizationSelected )
+    .then ( data => {
+       
+      Swal.fire({
+        icon: 'success',
+        title: 'Organización Actualiazada con éxito',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    });
+  }
+
+
+  showNewStoreForm = false;
+  newStore(){
+    this.showNewStoreForm = true;
+  }
+
+ store = 
+  {
+    "name": "",
+    "address": {
+      "street": "",
+      "city": "",
+      "state": "",
+      "postalCode": "",
+      "country": "",
+      "lat": "-34.61020399",
+      "lon": "-58.42448026"
+    }
+  }
+
+  createNewStore ()
+  {
+    this.storeService.addStore ( this.store , this.organizationSelected._id )
+    .then ( data => {
+      Swal.fire('Sucursal creada', 'Ahora puedes crear sorteos para dicha sucursal' , 'success')
+    })
+    this.showNewStoreForm = false;
+  }
+
+  goBackOrganizations(){
+    this.showStores = false;
+    this.showOrganizations = true;
+  }
 
 }
