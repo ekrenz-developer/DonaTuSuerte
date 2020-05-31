@@ -517,6 +517,15 @@ header: {
     "data": {
         "_id": "id",
         "name": "name",
+        "address": {
+          "street": "street",
+          "city": "city",
+          "state": "state",
+          "postalCode": "postalCode",
+          "country": "country",
+          "lat": "lat",
+          "lon": "lon"
+        },
         "draws": [...]
     }
 }
