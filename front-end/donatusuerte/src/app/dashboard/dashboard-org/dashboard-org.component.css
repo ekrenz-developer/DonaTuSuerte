@@ -1,9 +1,11 @@
 a{
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 button{
   width: 212px;
+  margin: 1px;
 }
 
 #formNewStore #collapseCreateDraw{
@@ -12,8 +14,12 @@ button{
 }
 
 .content {
-
   background-color: darkgray;
-  padding: 20px;
-  margin-top: 50px;
+  padding:20px;
+  margin-top:55px;
+  padding-top:165px;
+  height:700px;
+}
+.btn {
+  margin: 20px;
 }
