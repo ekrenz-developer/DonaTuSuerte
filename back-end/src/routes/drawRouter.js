@@ -31,12 +31,17 @@ const drawRouter = server => {
     middlewares.Auth.isAuth,
     DrawController.delete
   );
-  
   server.post(
     '/api/v1/draws/:_id/enter',
     middlewares.Auth.isAuth,
     middlewares.Role.isCompetitor,
     DrawController.enter
+  );
+  server.post(
+    '/api/v1/draws/:_id/run',
+    middlewares.Auth.isAuth,
+    middlewares.Role.isOrganization,
+    DrawController.run
   );
 }
 

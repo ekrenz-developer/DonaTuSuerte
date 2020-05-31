@@ -178,21 +178,24 @@ class DrawService extends Service {
 
   async enter(idUser, idDraw, countRaffles) {
     try {
+      if (!countRaffles) {
+        throw new error.ErrorHandler('Count of raffles not defined', 400);
+      }
       //asigno al usuario la cantidad de rifas correspondientes
       let index = 0;
       while (index < countRaffles) {
         let raffle = await this.Raffle.create({ user: idUser });
-        
+
         const newRaffle = { $push: { 'raffles': raffle._id } };
         let createdRaffle = await this.model.findByIdAndUpdate(idDraw, newRaffle, { new: true, upsert: true });
-
+      
         index ++;
       }
-
+      
       //agrego el sorteo a la lista de sorteos del usuario
       let draw = await this.User.findOne({ _id: idUser, draws: Types.ObjectId(idDraw) });
 
-      if (!draw) {
+      if (!draw || draw === null) {
         const newDraw = { $push: { 'draws': idDraw } }
         await this.User.findByIdAndUpdate(idUser, newDraw, { new: true, upsert: true });
       }
@@ -213,7 +216,6 @@ class DrawService extends Service {
         data: user
       };
     } catch (err) {
-      console.log(err)
       return {
         error: true,
         statusCode: 500,
